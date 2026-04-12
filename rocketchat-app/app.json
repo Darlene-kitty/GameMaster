@@ -1,0 +1,15 @@
+{
+    "id": "26d3daef-5ee7-41a6-85d6-f3ef1ccbd95a",
+    "version": "0.0.1",
+    "requiredApiVersion": "^1.44.0",
+    "iconFile": "icon.png",
+    "author": {
+        "name": "Darlene",
+        "homepage": "https://github.com/Darlene-kitty",
+        "support": "https://github.com/Darlene-kitty/GameMaster.git"
+    },
+    "name": "GameMaster",
+    "nameSlug": "gamemaster",
+    "classFile": "GameMasterApp.ts",
+    "description": "Bot de modération, gaming, sondages et rappels"
+}

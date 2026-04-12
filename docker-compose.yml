@@ -1,0 +1,118 @@
+# ============================================
+# ROCKET.CHAT TPS - DOCKER COMPOSE
+# ============================================
+
+services:
+  # ==========================================
+  # MONGODB - Base de données
+  # ==========================================
+  mongo:
+    image: mongo:6.0
+    container_name: rocket-mongo
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASS:-Admin123!}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE:-rocketchat}
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # ==========================================
+  # ROCKET.CHAT - Instance 1
+  # ==========================================
+  rocketchat-1:
+    build:
+      context: .
+      dockerfile: docker/rocketchat/Dockerfile
+    container_name: rocket-app-1
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      mongo:
+        condition: service_healthy
+    volumes:
+      - uploads-1:/app/uploads
+    environment:
+      ROOT_URL: ${ROOT_URL:-http://localhost}
+      MONGO_URL: mongodb://${MONGO_ROOT_USER:-admin}:${MONGO_ROOT_PASS:-Admin123!}@mongo:27017/${MONGO_DATABASE:-rocketchat}?authSource=admin
+      MONGO_OPLOG_URL: mongodb://${MONGO_ROOT_USER:-admin}:${MONGO_ROOT_PASS:-Admin123!}@mongo:27017/local?authSource=admin
+      PORT: 3000
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASS: ${ADMIN_PASS:-Admin456!}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@localhost.local}
+      NODE_ENV: ${NODE_ENV:-production}
+    networks:
+      - internal
+
+  # ==========================================
+  # ROCKET.CHAT - Instance 2
+  # ==========================================
+  rocketchat-2:
+    build:
+      context: .
+      dockerfile: docker/rocketchat/Dockerfile
+    container_name: rocket-app-2
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      mongo:
+        condition: service_healthy
+    volumes:
+      - uploads-2:/app/uploads
+    environment:
+      ROOT_URL: ${ROOT_URL:-http://localhost}
+      MONGO_URL: mongodb://${MONGO_ROOT_USER:-admin}:${MONGO_ROOT_PASS:-Admin123!}@mongo:27017/${MONGO_DATABASE:-rocketchat}?authSource=admin
+      MONGO_OPLOG_URL: mongodb://${MONGO_ROOT_USER:-admin}:${MONGO_ROOT_PASS:-Admin123!}@mongo:27017/local?authSource=admin
+      PORT: 3000
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASS: ${ADMIN_PASS:-Admin456!}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@localhost.local}
+      NODE_ENV: ${NODE_ENV:-production}
+    networks:
+      - internal
+
+  # ==========================================
+  # NGINX - Reverse Proxy + Load Balancer
+  # ==========================================
+  nginx:
+    image: nginx:alpine
+    container_name: rocket-nginx
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${HTTP_PORT:-80}:80"
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - rocketchat-1
+      - rocketchat-2
+    networks:
+      - internal
+      - external
+
+networks:
+  internal:
+    driver: bridge
+  external:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
+  uploads-1:
+    driver: local
+  uploads-2:
+    driver: local

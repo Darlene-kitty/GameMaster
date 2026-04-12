@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:6.0
+    command: ["mongod", "--oplogSize", "128", "--replSet", "rs0", "--bind_ip_all"]
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+
+  rocketchat:
+    image: rocketchat/rocket.chat:7.4.5
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/rocketchat?replicaSet=rs0
+      - ROOT_URL=http://localhost:3000
+      - PORT=3000
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASS=admin123
+      - ADMIN_EMAIL=admin@localhost.com
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:
