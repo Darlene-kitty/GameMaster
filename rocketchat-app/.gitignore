@@ -4,6 +4,11 @@ node_modules/
 # rc-apps package output
 dist/
 
+# Fichiers compilés TypeScript
+*.js
+*.js.map
+*.d.ts
+
 # JetBrains IDEs
 out/
 .idea/

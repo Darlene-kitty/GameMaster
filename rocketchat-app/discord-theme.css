@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    /* Variables Eldritch Forge (Mockup #111214) */
+    --rcx-color-surface: #111214; /* Deep dark black/purple */
+    --rcx-color-surface-hover: #1e1e24; /* Embed background */
+    --rcx-color-surface-sidebar: #0f1012;
+    --rcx-color-surface-light: #1e1e24;
+    --rcx-color-surface-dark: #0a0b0d;
+
+    --rcx-color-font-default: #e0d8e8;
+    --rcx-color-font-titles: #f39c12; /* Bright Orange titles */
+    --rcx-color-font-info: #a395b3;
+
+    /* Eldritch Orange Accent */
+    --rcx-color-primary-500: #e67e22; 
+    --rcx-color-primary-600: #d35400;
+    --rcx-color-primary-700: #c0392b;
+    
+    --rcx-button-colors-primary-background: #e67e22;
+    --rcx-button-colors-primary-background-hover: #d35400;
+    --rcx-button-colors-primary-background-active: #c0392b;
+
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+/* Global Font Apply */
+body, .rcx-box, .rcx-sidebar-item {
+    font-family: 'Inter', 'Whitney', sans-serif !important;
+}
+
+/* Global Layout Overrides for Dark Discord Feel */
+body, .rcx-css-1qxtzyp {
+    background-color: var(--rcx-color-surface) !important;
+    color: var(--rcx-color-font-default) !important;
+}
+
+/* Sidebar Styling (Server list / Channels) */
+aside.rcx-sidebar, .rc-old .sidebar {
+    background-color: var(--rcx-color-surface-sidebar) !important;
+}
+
+/* Sidebar items hover effects like Discord */
+.rcx-sidebar-item {
+    border-radius: 4px !important;
+    margin: 1px 8px !important;
+    color: var(--rcx-color-font-info) !important;
+    transition: background-color 0.1s ease-out, color 0.1s ease-out;
+}
+.rcx-sidebar-item:hover {
+    background-color: rgba(79,84,92,0.32) !important;
+    color: var(--rcx-color-font-default) !important;
+}
+.rcx-sidebar-item--selected {
+    background-color: rgba(79,84,92,0.48) !important;
+    color: var(--rcx-color-font-titles) !important;
+}
+
+/* Active Indicator */
+.rcx-badge--primary {
+    background-color: var(--rcx-color-primary-500) !important;
+}
+
+/* User Name Role Colors */
+/* Note: :contains() n'est pas CSS standard, on cible via attribut title uniquement */
+.rcx-message-header__name[title="Guerrier"] {
+    color: #e74c3c !important; /* Red */
+}
+.rcx-message-header__name[title="Archer"] {
+    color: #3498db !important; /* Blue */
+}
+.rcx-message-header__name[title="GAMEMASTER BOT"],
+.rcx-message-header__name[title="🎮 GameMaster"] {
+    color: var(--rcx-color-primary-500) !important;
+    text-transform: uppercase;
+}
+
+/* Message Box */
+.rcx-message, .rc-message-box {
+    background-color: transparent !important;
+}
+.rcx-message:hover {
+    background-color: rgba(4,4,5,0.07) !important;
+}
+
+/* Message Input Area */
+.rc-message-box__container, .rcx-text-input {
+    background-color: #383a40 !important;
+    border: none !important;
+}
+.rc-message-box__container {
+    border-radius: 8px !important;
+    padding: 2px 0px !important;
+}
+.rcx-text-input {
+    color: var(--rcx-color-font-default) !important;
+}
+.rcx-text-input:focus {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Top Header Bar */
+header.rcx-box {
+    background-color: var(--rcx-color-surface) !important;
+    border-bottom: 1px solid #1e1f22 !important;
+}
+
+/* Mentions style */
+span.mention-link {
+    background-color: rgba(88, 101, 242, 0.3) !important;
+    color: #c9cdfb !important;
+    border-radius: 3px !important;
+    padding: 0 2px !important;
+}
+span.mention-link:hover {
+    background-color: var(--rcx-color-primary-500) !important;
+    color: #ffffff !important;
+}

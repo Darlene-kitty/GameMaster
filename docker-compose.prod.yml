@@ -1,0 +1,33 @@
+# ============================================
+# PRODUCTION OVERRIDE
+# Usage: docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+# ============================================
+
+services:
+  rocketchat-1:
+    image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/rocket-chat-tps:latest
+    build: null
+    restart: always
+
+  rocketchat-2:
+    image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/rocket-chat-tps:latest
+    build: null
+    restart: always
+
+  nginx:
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./ssl-certs:/etc/nginx/certs:ro
+      - certbot-www:/var/www/certbot:ro
+
+  certbot:
+    volumes:
+      - ./ssl-certs:/etc/letsencrypt
+      - certbot-www:/var/www/certbot
+
+volumes:
+  certbot-www:
+    driver: local

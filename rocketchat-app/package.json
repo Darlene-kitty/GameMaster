@@ -1,4 +1,9 @@
 {
+    "scripts": {
+        "build": "tsc",
+        "deploy": "rc-apps deploy",
+        "deploy:update": "rc-apps deploy --update"
+    },
     "devDependencies": {
         "@rocket.chat/apps-engine": "^1.44.0",
         "@types/node": "14.14.6",

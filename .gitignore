@@ -1,0 +1,19 @@
+# Secrets
+.env
+
+# Backups locaux
+backups/
+*.archive.gz
+*.zip
+
+# Docker
+docker/nginx/certs/*.crt
+docker/nginx/certs/*.key
+ssl-certs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
