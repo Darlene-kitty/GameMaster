@@ -9,7 +9,7 @@ services:
   mongo:
     image: mongo:6.0
     container_name: rocket-mongo
-    command: mongod --replSet rs0 --bind_ip_all --noauth
+    command: mongod --replSet rs0 --bind_ip_all
     restart: unless-stopped
     env_file:
       - .env
