@@ -100,19 +100,12 @@ services:
   # NGINX + ModSecurity WAF
   # ==========================================
   nginx:
-    image: owasp/modsecurity-crs:nginx-alpine
+    image: nginx:alpine
     container_name: rocket-nginx
     restart: unless-stopped
-    environment:
-      MODSEC_RULE_ENGINE: "On"
-      PARANOIA: 1
-      ANOMALY_INBOUND: 5
-      ANOMALY_OUTBOUND: 4
-      PORT: 80
-      SSL_PORT: 443
     ports:
-      - "${HTTP_PORT:-8080}:80"
-      - "${HTTPS_PORT:-8443}:443"
+      - "${HTTP_PORT:-8080}:8080"
+      - "${HTTPS_PORT:-8443}:8443"
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - ./docker/nginx/certs:/etc/nginx/certs:ro

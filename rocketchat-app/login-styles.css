@@ -1,0 +1,144 @@
+/* ============================================
+   PAGE DE CONNEXION - GameMaster Eldritch Forge
+   ============================================ */
+
+/* Fond de la page de login */
+.rcx-box.rcx-box--full.login-page,
+[class*="login-page"],
+.login-page__content {
+  background: radial-gradient(ellipse at 60% 40%, #1a0a2e 0%, #0f1012 60%, #0a0b0d 100%) !important;
+}
+
+/* Overlay de particules (pseudo-élément) */
+.login-page__content::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(230,126,34,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 10%, rgba(230,126,34,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 80%, rgba(230,126,34,0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 10% 60%, rgba(230,126,34,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 70%, rgba(230,126,34,0.2) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Carte de login */
+.login-page__content .rcx-box,
+[class*="login-card"],
+.login-page form {
+  background: rgba(17, 18, 20, 0.92) !important;
+  border: 1px solid rgba(230, 126, 34, 0.25) !important;
+  border-radius: 12px !important;
+  box-shadow:
+    0 0 40px rgba(230, 126, 34, 0.15),
+    0 20px 60px rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(12px);
+}
+
+/* Wrapper custom injecté */
+.gm-login-wrapper {
+  text-align: center;
+  margin-bottom: 24px;
+  padding: 8px 0;
+}
+
+.gm-login-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 0 12px rgba(230, 126, 34, 0.8));
+  animation: gm-float 3s ease-in-out infinite;
+}
+
+@keyframes gm-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+.gm-login-title {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 28px !important;
+  font-weight: 800 !important;
+  letter-spacing: 6px !important;
+  color: #e67e22 !important;
+  text-shadow: 0 0 20px rgba(230, 126, 34, 0.6) !important;
+  margin: 0 0 4px 0 !important;
+  text-transform: uppercase;
+}
+
+.gm-login-subtitle {
+  font-size: 13px !important;
+  color: #a395b3 !important;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0 0 8px 0 !important;
+}
+
+.gm-login-lore {
+  font-size: 12px;
+  color: rgba(163, 149, 179, 0.7);
+  font-style: italic;
+  border-top: 1px solid rgba(230, 126, 34, 0.15);
+  padding-top: 12px;
+  margin-top: 4px;
+}
+
+/* Champs de saisie */
+.login-page input,
+.login-page .rcx-input-box {
+  background: #1e1e24 !important;
+  border: 1px solid rgba(230, 126, 34, 0.2) !important;
+  color: #e0d8e8 !important;
+  border-radius: 6px !important;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.login-page input:focus,
+.login-page .rcx-input-box:focus {
+  border-color: #e67e22 !important;
+  box-shadow: 0 0 0 2px rgba(230, 126, 34, 0.2) !important;
+  outline: none !important;
+}
+
+/* Bouton de connexion */
+.login-page button[type="submit"],
+.login-page .rcx-button--primary {
+  background: linear-gradient(135deg, #e67e22, #d35400) !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3) !important;
+}
+
+.login-page button[type="submit"]:hover,
+.login-page .rcx-button--primary:hover {
+  background: linear-gradient(135deg, #d35400, #c0392b) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(230, 126, 34, 0.5) !important;
+}
+
+/* Labels */
+.login-page label,
+.login-page .rcx-label {
+  color: #a395b3 !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+}
+
+/* Lien "Mot de passe oublié" */
+.login-page a {
+  color: #e67e22 !important;
+  text-decoration: none !important;
+  transition: color 0.2s;
+}
+
+.login-page a:hover {
+  color: #f39c12 !important;
+  text-decoration: underline !important;
+}

@@ -1,0 +1,192 @@
+/* ============================================
+   PAGE D'ACCUEIL - GameMaster Eldritch Forge
+   ============================================ */
+
+/* Conteneur principal */
+.gm-home {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  font-family: 'Inter', sans-serif;
+  color: #e0d8e8;
+}
+
+/* Hero */
+.gm-home-hero {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 32px;
+  background: linear-gradient(135deg, rgba(230,126,34,0.08) 0%, rgba(17,18,20,0) 100%);
+  border: 1px solid rgba(230, 126, 34, 0.2);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.gm-home-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, rgba(230,126,34,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.gm-home-icon {
+  font-size: 56px;
+  display: block;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 0 16px rgba(230, 126, 34, 0.7));
+  animation: gm-home-float 4s ease-in-out infinite;
+}
+
+@keyframes gm-home-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+.gm-home-title {
+  font-size: 32px !important;
+  font-weight: 800 !important;
+  color: #e67e22 !important;
+  letter-spacing: 4px !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 0 24px rgba(230, 126, 34, 0.5) !important;
+  margin: 0 0 8px 0 !important;
+}
+
+.gm-home-subtitle {
+  font-size: 14px !important;
+  color: #a395b3 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  margin: 0 !important;
+}
+
+/* Grille de cartes */
+.gm-home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.gm-home-card {
+  background: rgba(30, 30, 36, 0.8);
+  border: 1px solid rgba(230, 126, 34, 0.15);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.gm-home-card:hover {
+  border-color: rgba(230, 126, 34, 0.5);
+  background: rgba(30, 30, 36, 1);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(230, 126, 34, 0.15);
+}
+
+.gm-home-card-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.gm-home-card h3 {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #f39c12 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  margin: 0 0 8px 0 !important;
+}
+
+.gm-home-card p {
+  font-size: 12px !important;
+  color: #a395b3 !important;
+  margin: 0 0 10px 0 !important;
+  line-height: 1.5 !important;
+}
+
+.gm-home-card p strong {
+  color: #e0d8e8 !important;
+}
+
+.gm-home-card code {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.4) !important;
+  color: #e67e22 !important;
+  font-size: 11px !important;
+  padding: 3px 8px !important;
+  border-radius: 4px !important;
+  border: 1px solid rgba(230, 126, 34, 0.2) !important;
+  font-family: 'Consolas', 'Monaco', monospace !important;
+}
+
+/* Section commandes */
+.gm-home-commands {
+  background: rgba(15, 16, 18, 0.8);
+  border: 1px solid rgba(230, 126, 34, 0.15);
+  border-radius: 10px;
+  padding: 24px;
+}
+
+.gm-home-commands h2 {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #e67e22 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  margin: 0 0 16px 0 !important;
+}
+
+.gm-home-cmd-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.gm-home-cmd {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  border: 1px solid rgba(230, 126, 34, 0.1);
+  transition: border-color 0.2s;
+}
+
+.gm-home-cmd:hover {
+  border-color: rgba(230, 126, 34, 0.35);
+}
+
+.gm-home-cmd code {
+  color: #e67e22 !important;
+  font-size: 12px !important;
+  font-family: 'Consolas', 'Monaco', monospace !important;
+  font-weight: 600 !important;
+}
+
+.gm-home-cmd span {
+  font-size: 11px !important;
+  color: #a395b3 !important;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .gm-home {
+    padding: 16px 12px;
+  }
+  .gm-home-title {
+    font-size: 22px !important;
+    letter-spacing: 2px !important;
+  }
+  .gm-home-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
