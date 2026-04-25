@@ -12,7 +12,5 @@
     "nameSlug": "gamemaster",
     "classFile": "GameMasterApp.ts",
     "description": "Bot de modération, gaming, sondages et rappels",
-    "implements": [
-        "ISlashCommand"
-    ]
+    "implements": []
 }

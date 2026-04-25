@@ -1,119 +1,444 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* ============================================
+   THÈME GLOBAL — GameMaster : The Archive
+   Mobile-first — Interface Rocket.Chat
+   ============================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
+
+/* ══════════════════════════════════════════
+   VARIABLES
+══════════════════════════════════════════ */
 :root {
-    /* Variables Eldritch Forge (Mockup #111214) */
-    --rcx-color-surface: #111214; /* Deep dark black/purple */
-    --rcx-color-surface-hover: #1e1e24; /* Embed background */
-    --rcx-color-surface-sidebar: #0f1012;
-    --rcx-color-surface-light: #1e1e24;
-    --rcx-color-surface-dark: #0a0b0d;
-
-    --rcx-color-font-default: #e0d8e8;
-    --rcx-color-font-titles: #f39c12; /* Bright Orange titles */
-    --rcx-color-font-info: #a395b3;
-
-    /* Eldritch Orange Accent */
-    --rcx-color-primary-500: #e67e22; 
-    --rcx-color-primary-600: #d35400;
-    --rcx-color-primary-700: #c0392b;
-    
-    --rcx-button-colors-primary-background: #e67e22;
-    --rcx-button-colors-primary-background-hover: #d35400;
-    --rcx-button-colors-primary-background-active: #c0392b;
-
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  --gm-gold:          #c9a84c;
+  --gm-gold-light:    #f0d080;
+  --gm-gold-dim:      rgba(201,168,76,0.15);
+  --gm-ember:         #8b2500;
+  --gm-parchment:     #e8dfc8;
+  --gm-parchment-dim: rgba(232,223,200,0.6);
+  --gm-ink:           #0e0c09;
+  --gm-stone-dark:    #111009;
+  --gm-stone:         #1a1510;
+  --gm-stone-mid:     #252018;
+  --gm-stone-light:   #332d24;
+  --gm-border:        rgba(201,168,76,0.18);
+  --gm-border-hover:  rgba(201,168,76,0.45);
+  /* Touch targets */
+  --gm-touch-min:     44px;
 }
 
-/* Global Font Apply */
-body, .rcx-box, .rcx-sidebar-item {
-    font-family: 'Inter', 'Whitney', sans-serif !important;
+/* ══════════════════════════════════════════
+   FOND GLOBAL
+══════════════════════════════════════════ */
+body,
+.rcx-box.rcx-box--full {
+  background-color: var(--gm-stone-dark) !important;
+  font-family: 'Crimson Text', Georgia, serif !important;
 }
 
-/* Global Layout Overrides for Dark Discord Feel */
-body, .rcx-css-1qxtzyp {
-    background-color: var(--rcx-color-surface) !important;
-    color: var(--rcx-color-font-default) !important;
+/* ══════════════════════════════════════════
+   SIDEBAR
+══════════════════════════════════════════ */
+.rcx-sidebar,
+[class*="sidebar"],
+nav[class*="sidebar"] {
+  background: linear-gradient(180deg, #141009 0%, #0e0c07 100%) !important;
+  border-right: 1px solid var(--gm-border) !important;
 }
 
-/* Sidebar Styling (Server list / Channels) */
-aside.rcx-sidebar, .rc-old .sidebar {
-    background-color: var(--rcx-color-surface-sidebar) !important;
+[class*="sidebar-header"],
+[class*="SidebarHeader"] {
+  background: linear-gradient(135deg, #1a1510, #111009) !important;
+  border-bottom: 1px solid var(--gm-border) !important;
+  min-height: var(--gm-touch-min) !important;
 }
 
-/* Sidebar items hover effects like Discord */
-.rcx-sidebar-item {
-    border-radius: 4px !important;
-    margin: 1px 8px !important;
-    color: var(--rcx-color-font-info) !important;
-    transition: background-color 0.1s ease-out, color 0.1s ease-out;
-}
-.rcx-sidebar-item:hover {
-    background-color: rgba(79,84,92,0.32) !important;
-    color: var(--rcx-color-font-default) !important;
-}
-.rcx-sidebar-item--selected {
-    background-color: rgba(79,84,92,0.48) !important;
-    color: var(--rcx-color-font-titles) !important;
+[class*="sidebar-header"] span,
+[class*="sidebar-header"] p,
+[class*="SidebarHeader"] span {
+  font-family: 'Cinzel', serif !important;
+  color: var(--gm-gold-light) !important;
+  letter-spacing: 1px !important;
 }
 
-/* Active Indicator */
-.rcx-badge--primary {
-    background-color: var(--rcx-color-primary-500) !important;
+[class*="sidebar-item"],
+[class*="SidebarItem"] {
+  border-radius: 2px !important;
+  transition: background 0.15s !important;
+  min-height: var(--gm-touch-min) !important;
 }
 
-/* User Name Role Colors */
-/* Note: :contains() n'est pas CSS standard, on cible via attribut title uniquement */
-.rcx-message-header__name[title="Guerrier"] {
-    color: #e74c3c !important; /* Red */
-}
-.rcx-message-header__name[title="Archer"] {
-    color: #3498db !important; /* Blue */
-}
-.rcx-message-header__name[title="GAMEMASTER BOT"],
-.rcx-message-header__name[title="🎮 GameMaster"] {
-    color: var(--rcx-color-primary-500) !important;
-    text-transform: uppercase;
+[class*="sidebar-item"]:hover,
+[class*="SidebarItem"]:hover {
+  background: rgba(201,168,76,0.07) !important;
 }
 
-/* Message Box */
-.rcx-message, .rc-message-box {
-    background-color: transparent !important;
+[class*="sidebar-item--selected"],
+[class*="SidebarItem--selected"],
+[class*="sidebar-item"][aria-selected="true"] {
+  background: rgba(201,168,76,0.12) !important;
+  border-left: 2px solid var(--gm-gold) !important;
 }
+
+[class*="sidebar-item"] span,
+[class*="SidebarItem"] span,
+[class*="sidebar-item"] p {
+  color: var(--gm-parchment-dim) !important;
+  font-family: 'Crimson Text', serif !important;
+  font-size: 15px !important;
+}
+
+[class*="sidebar-item--selected"] span,
+[class*="sidebar-item"][aria-selected="true"] span {
+  color: var(--gm-parchment) !important;
+}
+
+[class*="sidebar-section-title"],
+[class*="SidebarSection"] h4,
+[class*="sidebar-section"] span {
+  font-family: 'Cinzel', serif !important;
+  font-size: 10px !important;
+  letter-spacing: 3px !important;
+  color: rgba(201,168,76,0.5) !important;
+  text-transform: uppercase !important;
+}
+
+/* ══════════════════════════════════════════
+   ZONE DE MESSAGES
+══════════════════════════════════════════ */
+.rcx-room,
+[class*="room-container"],
+[class*="main-content"],
+main {
+  background: var(--gm-stone) !important;
+}
+
+[class*="room-header"],
+[class*="RoomHeader"],
+header[class*="room"] {
+  background: linear-gradient(180deg, #1a1510, #161209) !important;
+  border-bottom: 1px solid var(--gm-border) !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.4) !important;
+  min-height: var(--gm-touch-min) !important;
+}
+
+[class*="room-header"] h1,
+[class*="room-header"] span[class*="title"],
+[class*="RoomHeader"] h1 {
+  font-family: 'Cinzel', serif !important;
+  color: var(--gm-gold-light) !important;
+  letter-spacing: 2px !important;
+  font-size: 15px !important;
+}
+
+[class*="message"],
+.rcx-message {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(201,168,76,0.05) !important;
+  transition: background 0.15s !important;
+  /* Padding confortable sur mobile */
+  padding: 6px 12px !important;
+}
+
+[class*="message"]:hover,
 .rcx-message:hover {
-    background-color: rgba(4,4,5,0.07) !important;
+  background: rgba(201,168,76,0.04) !important;
 }
 
-/* Message Input Area */
-.rc-message-box__container, .rcx-text-input {
-    background-color: #383a40 !important;
-    border: none !important;
-}
-.rc-message-box__container {
-    border-radius: 8px !important;
-    padding: 2px 0px !important;
-}
-.rcx-text-input {
-    color: var(--rcx-color-font-default) !important;
-}
-.rcx-text-input:focus {
-    border: none !important;
-    box-shadow: none !important;
+[class*="message"] p,
+[class*="message-body"],
+.rcx-message p {
+  font-family: 'Crimson Text', serif !important;
+  font-size: 16px !important;
+  color: var(--gm-parchment) !important;
+  line-height: 1.6 !important;
 }
 
-/* Top Header Bar */
-header.rcx-box {
-    background-color: var(--rcx-color-surface) !important;
-    border-bottom: 1px solid #1e1f22 !important;
+[class*="message-username"],
+[class*="username"],
+.rcx-message [class*="username"] {
+  font-family: 'Cinzel', serif !important;
+  font-size: 12px !important;
+  color: var(--gm-gold) !important;
+  letter-spacing: 1px !important;
 }
 
-/* Mentions style */
-span.mention-link {
-    background-color: rgba(88, 101, 242, 0.3) !important;
-    color: #c9cdfb !important;
-    border-radius: 3px !important;
-    padding: 0 2px !important;
+[class*="message-time"],
+[class*="timestamp"],
+time {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 10px !important;
+  color: rgba(201,168,76,0.35) !important;
 }
-span.mention-link:hover {
-    background-color: var(--rcx-color-primary-500) !important;
-    color: #ffffff !important;
+
+code {
+  background: rgba(0,0,0,0.5) !important;
+  color: var(--gm-gold) !important;
+  border: 1px solid rgba(201,168,76,0.25) !important;
+  border-radius: 2px !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 13px !important;
+  padding: 1px 6px !important;
+}
+
+pre, pre code {
+  background: rgba(0,0,0,0.6) !important;
+  border: 1px solid var(--gm-border) !important;
+  border-left: 3px solid var(--gm-gold) !important;
+  border-radius: 2px !important;
+  color: var(--gm-parchment) !important;
+  overflow-x: auto !important;
+}
+
+/* ══════════════════════════════════════════
+   BARRE DE SAISIE
+══════════════════════════════════════════ */
+[class*="message-composer"],
+[class*="MessageComposer"],
+[class*="composer"] {
+  background: linear-gradient(180deg, #161209, #111009) !important;
+  border-top: 1px solid var(--gm-border) !important;
+  padding: 10px 12px !important;
+}
+
+[class*="message-composer"] [contenteditable],
+[class*="composer"] [contenteditable],
+[class*="message-input"] {
+  background: rgba(10,8,6,0.8) !important;
+  border: 1px solid rgba(201,168,76,0.2) !important;
+  border-radius: 2px !important;
+  color: var(--gm-parchment) !important;
+  font-family: 'Crimson Text', serif !important;
+  font-size: 16px !important; /* évite zoom iOS */
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+  min-height: 40px !important;
+  padding: 8px 12px !important;
+}
+
+[class*="message-composer"] [contenteditable]:focus,
+[class*="composer"] [contenteditable]:focus {
+  border-color: var(--gm-gold) !important;
+  box-shadow: 0 0 0 2px rgba(201,168,76,0.12) !important;
+  outline: none !important;
+}
+
+[class*="message-composer"] [contenteditable]:empty::before,
+[class*="composer"] [contenteditable]:empty::before {
+  color: rgba(201,168,76,0.3) !important;
+  font-style: italic !important;
+}
+
+/* ══════════════════════════════════════════
+   BOUTONS — taille tactile
+══════════════════════════════════════════ */
+.rcx-button--primary,
+[class*="button--primary"] {
+  background: linear-gradient(135deg, #7a5c10, var(--gm-gold), #7a5c10) !important;
+  background-size: 200% !important;
+  border: 1px solid rgba(201,168,76,0.4) !important;
+  border-radius: 2px !important;
+  color: var(--gm-ink) !important;
+  font-family: 'Cinzel', serif !important;
+  font-size: 11px !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  transition: all 0.25s !important;
+  min-height: var(--gm-touch-min) !important;
+  min-width: var(--gm-touch-min) !important;
+}
+
+.rcx-button--primary:hover,
+[class*="button--primary"]:hover {
+  background-position: 100% !important;
+  box-shadow: 0 4px 20px rgba(201,168,76,0.35) !important;
+  transform: translateY(-1px) !important;
+}
+
+.rcx-button--secondary,
+[class*="button--secondary"] {
+  background: rgba(201,168,76,0.06) !important;
+  border: 1px solid var(--gm-border) !important;
+  border-radius: 2px !important;
+  color: var(--gm-parchment-dim) !important;
+  font-family: 'Cinzel', serif !important;
+  font-size: 11px !important;
+  letter-spacing: 1px !important;
+  transition: all 0.2s !important;
+  min-height: var(--gm-touch-min) !important;
+}
+
+.rcx-button--secondary:hover,
+[class*="button--secondary"]:hover {
+  background: rgba(201,168,76,0.1) !important;
+  border-color: var(--gm-border-hover) !important;
+  color: var(--gm-parchment) !important;
+}
+
+/* Icônes boutons (toolbar) */
+[class*="toolbar"] button,
+[class*="action-button"],
+[class*="icon-button"] {
+  min-width: var(--gm-touch-min) !important;
+  min-height: var(--gm-touch-min) !important;
+  color: rgba(201,168,76,0.55) !important;
+  transition: color 0.2s !important;
+}
+
+[class*="toolbar"] button:hover,
+[class*="action-button"]:hover,
+[class*="icon-button"]:hover {
+  color: var(--gm-gold) !important;
+}
+
+/* ══════════════════════════════════════════
+   MODALES
+══════════════════════════════════════════ */
+.rcx-modal,
+[class*="modal"] {
+  background: linear-gradient(160deg, #1a1510, #111009) !important;
+  border: 1px solid var(--gm-border) !important;
+  border-radius: 2px !important;
+  box-shadow:
+    0 0 0 1px rgba(201,168,76,0.06),
+    0 30px 80px rgba(0,0,0,0.8) !important;
+  /* Plein écran sur mobile */
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+[class*="modal-header"],
+.rcx-modal__header {
+  border-bottom: 1px solid var(--gm-border) !important;
+  background: rgba(201,168,76,0.04) !important;
+  min-height: var(--gm-touch-min) !important;
+}
+
+[class*="modal-header"] h1,
+[class*="modal-header"] h2,
+.rcx-modal__header h1 {
+  font-family: 'Cinzel', serif !important;
+  color: var(--gm-gold-light) !important;
+  letter-spacing: 2px !important;
+  font-size: 14px !important;
+}
+
+/* ══════════════════════════════════════════
+   SCROLLBAR
+══════════════════════════════════════════ */
+::-webkit-scrollbar       { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.25); }
+::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.22); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(201,168,76,0.42); }
+
+/* ══════════════════════════════════════════
+   BADGES
+══════════════════════════════════════════ */
+[class*="badge"],
+.rcx-badge {
+  background: var(--gm-ember) !important;
+  color: var(--gm-parchment) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 10px !important;
+  border-radius: 2px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+}
+
+/* ══════════════════════════════════════════
+   AVATARS
+══════════════════════════════════════════ */
+[class*="avatar"],
+.rcx-avatar {
+  border: 1px solid rgba(201,168,76,0.28) !important;
+  border-radius: 2px !important;
+}
+
+/* ══════════════════════════════════════════
+   INPUTS
+══════════════════════════════════════════ */
+.rcx-input-box,
+.rcx-input-box__input,
+input[class*="rcx"],
+select[class*="rcx"] {
+  background: rgba(10,8,6,0.8) !important;
+  border: 1px solid rgba(201,168,76,0.2) !important;
+  border-radius: 2px !important;
+  color: var(--gm-parchment) !important;
+  font-family: 'Crimson Text', serif !important;
+  font-size: 16px !important;
+  min-height: var(--gm-touch-min) !important;
+}
+
+.rcx-input-box:focus-within,
+.rcx-input-box__input:focus {
+  border-color: var(--gm-gold) !important;
+  box-shadow: 0 0 0 2px rgba(201,168,76,0.12) !important;
+}
+
+/* ══════════════════════════════════════════
+   TEXTE GÉNÉRAL
+══════════════════════════════════════════ */
+p, span, div, li, td, th { color: var(--gm-parchment) !important; }
+h1, h2, h3, h4, h5, h6   { font-family: 'Cinzel', serif !important; color: var(--gm-gold-light) !important; }
+a { color: var(--gm-gold) !important; transition: color 0.2s !important; }
+a:hover { color: var(--gm-gold-light) !important; }
+
+/* ══════════════════════════════════════════
+   SÉPARATEURS DE DATE
+══════════════════════════════════════════ */
+[class*="date-separator"],
+[class*="DateSeparator"] {
+  color: rgba(201,168,76,0.4) !important;
+  font-family: 'Cinzel', serif !important;
+  font-size: 10px !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase !important;
+}
+
+[class*="date-separator"]::before,
+[class*="date-separator"]::after {
+  background: var(--gm-border) !important;
+}
+
+/* ══════════════════════════════════════════
+   TABLETTE (≥ 480px)
+══════════════════════════════════════════ */
+@media (min-width: 480px) {
+  [class*="message"],
+  .rcx-message {
+    padding: 8px 16px !important;
+  }
+
+  [class*="room-header"] h1,
+  [class*="RoomHeader"] h1 {
+    font-size: 16px !important;
+  }
+
+  [class*="message-composer"],
+  [class*="composer"] {
+    padding: 12px 16px !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   DESKTOP (≥ 768px)
+══════════════════════════════════════════ */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+
+  .rcx-modal,
+  [class*="modal"] {
+    max-width: 600px !important;
+    margin: auto !important;
+    border-radius: 2px !important;
+  }
+
+  [class*="message"],
+  .rcx-message {
+    padding: 8px 20px !important;
+  }
+
+  [class*="message-username"],
+  .rcx-message [class*="username"] {
+    font-size: 13px !important;
+  }
 }

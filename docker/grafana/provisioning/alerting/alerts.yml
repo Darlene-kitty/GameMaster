@@ -1,0 +1,196 @@
+apiVersion: 1
+
+groups:
+  - orgId: 1
+    name: GameMaster Alerts
+    folder: GameMaster
+    interval: 1m
+    rules:
+
+      # ==========================================
+      # ALERTE CPU > 80%
+      # ==========================================
+      - uid: cpu-high-alert
+        title: "🔥 CPU Usage > 80%"
+        condition: C
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 300
+              to: 0
+            datasourceUid: prometheus
+            model:
+              expr: >
+                sum(rate(container_cpu_usage_seconds_total{
+                  name=~"rocket-app-.*|rocket-mongo|rocket-nginx"
+                }[5m])) by (name) * 100
+              intervalMs: 1000
+              maxDataPoints: 43200
+              refId: A
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              conditions:
+                - evaluator:
+                    params:
+                      - 80
+                    type: gt
+                  operator:
+                    type: and
+                  query:
+                    params:
+                      - A
+                  reducer:
+                    type: last
+                  type: query
+              refId: C
+              type: threshold
+        noDataState: NoData
+        execErrState: Error
+        for: 2m
+        annotations:
+          summary: "CPU élevé détecté"
+          description: "Un container utilise plus de 80% du CPU depuis 2 minutes."
+        labels:
+          severity: warning
+
+      # ==========================================
+      # ALERTE RAM > 80%
+      # ==========================================
+      - uid: memory-high-alert
+        title: "💾 Memory Usage > 80%"
+        condition: C
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 300
+              to: 0
+            datasourceUid: prometheus
+            model:
+              expr: >
+                (container_memory_usage_bytes{
+                  name=~"rocket-app-.*|rocket-mongo|rocket-nginx"
+                } / container_spec_memory_limit_bytes{
+                  name=~"rocket-app-.*|rocket-mongo|rocket-nginx"
+                }) * 100
+              intervalMs: 1000
+              maxDataPoints: 43200
+              refId: A
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              conditions:
+                - evaluator:
+                    params:
+                      - 80
+                    type: gt
+                  operator:
+                    type: and
+                  query:
+                    params:
+                      - A
+                  reducer:
+                    type: last
+                  type: query
+              refId: C
+              type: threshold
+        noDataState: NoData
+        execErrState: Error
+        for: 2m
+        annotations:
+          summary: "Mémoire élevée détectée"
+          description: "Un container utilise plus de 80% de la mémoire depuis 2 minutes."
+        labels:
+          severity: warning
+
+      # ==========================================
+      # ALERTE CONTAINER DOWN
+      # ==========================================
+      - uid: container-down-alert
+        title: "🚨 Container Down"
+        condition: C
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 300
+              to: 0
+            datasourceUid: prometheus
+            model:
+              expr: >
+                absent(container_last_seen{
+                  name=~"rocket-app-1|rocket-app-2|rocket-mongo|rocket-nginx"
+                })
+              intervalMs: 1000
+              maxDataPoints: 43200
+              refId: A
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              conditions:
+                - evaluator:
+                    params:
+                      - 0
+                    type: gt
+                  operator:
+                    type: and
+                  query:
+                    params:
+                      - A
+                  reducer:
+                    type: last
+                  type: query
+              refId: C
+              type: threshold
+        noDataState: Alerting
+        execErrState: Error
+        for: 1m
+        annotations:
+          summary: "Container arrêté !"
+          description: "Un container critique est arrêté depuis plus d'1 minute."
+        labels:
+          severity: critical
+
+      # ==========================================
+      # ALERTE ROCKET.CHAT DOWN
+      # ==========================================
+      - uid: rocketchat-down-alert
+        title: "🚨 Rocket.Chat Instance Down"
+        condition: C
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 300
+              to: 0
+            datasourceUid: prometheus
+            model:
+              expr: >
+                absent(up{job="cadvisor"})
+              intervalMs: 1000
+              maxDataPoints: 43200
+              refId: A
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              conditions:
+                - evaluator:
+                    params:
+                      - 0
+                    type: gt
+                  operator:
+                    type: and
+                  query:
+                    params:
+                      - A
+                  reducer:
+                    type: last
+                  type: query
+              refId: C
+              type: threshold
+        noDataState: Alerting
+        execErrState: Error
+        for: 1m
+        annotations:
+          summary: "Rocket.Chat est inaccessible"
+          description: "Le service Rocket.Chat ne répond plus depuis 1 minute."
+        labels:
+          severity: critical

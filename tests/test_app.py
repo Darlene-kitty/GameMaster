@@ -52,15 +52,37 @@ class TestRootEndpoint:
         response = client.get('/')
         assert response.status_code == 200
     
-    def test_root_endpoint_returns_text(self, client):
-        """Test que / retourne du texte"""
+    def test_root_endpoint_returns_json(self, client):
+        """Test que / retourne du JSON"""
         response = client.get('/')
-        assert response.content_type == 'text/html; charset=utf-8'
+        assert response.content_type == 'application/json'
     
-    def test_root_endpoint_contains_message(self, client):
-        """Test que / contient le message attendu"""
+    def test_root_endpoint_contains_service_name(self, client):
+        """Test que / contient le nom du service"""
         response = client.get('/')
-        assert b'Hello from AWS Cloud CI/CD!' in response.data
+        data = response.get_json()
+        assert data['service'] == 'rocket-chat-tps'
+        assert data['status'] == 'running'
+
+
+class TestReadyEndpoint:
+    """Tests pour l'endpoint /ready"""
+
+    def test_ready_returns_200_when_env_set(self, client, monkeypatch):
+        """Test que /ready retourne 200 quand les variables sont définies"""
+        monkeypatch.setenv('MONGO_ROOT_USER', 'admin')
+        monkeypatch.setenv('ADMIN_PASS', 'secret')
+        response = client.get('/ready')
+        assert response.status_code == 200
+
+    def test_ready_returns_503_when_env_missing(self, client, monkeypatch):
+        """Test que /ready retourne 503 quand les variables manquent"""
+        monkeypatch.delenv('MONGO_ROOT_USER', raising=False)
+        monkeypatch.delenv('ADMIN_PASS', raising=False)
+        response = client.get('/ready')
+        assert response.status_code == 503
+        data = response.get_json()
+        assert 'missing' in data
 
 
 class TestAppConfiguration:

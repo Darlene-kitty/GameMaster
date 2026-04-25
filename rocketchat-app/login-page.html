@@ -1,10 +1,38 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+:root{--gold:#c9a84c;--gold-light:#f0d080;--parchment:#e8dfc8;--ink:#0e0c09;}
+body,html,#root,[id="root"]{background:linear-gradient(180deg,#0e0c09 0%,#14110d 50%,#0a0806 100%)!important;min-height:100vh!important;}
+.gm-login-wrapper{text-align:center;padding:8px 0 4px;position:relative;}
+.gm-login-seal{position:relative;display:inline-block;margin-bottom:14px;}
+.gm-login-seal::before{content:'';position:absolute;inset:-16px;border-radius:50%;border:1px solid rgba(201,168,76,0.3);animation:gm-spin 20s linear infinite;}
+.gm-login-seal::after{content:'';position:absolute;inset:-28px;border-radius:50%;border:1px dashed rgba(201,168,76,0.15);animation:gm-spin 35s linear infinite reverse;}
+@keyframes gm-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.gm-login-icon{font-size:52px;display:block;filter:drop-shadow(0 0 16px rgba(201,168,76,0.9)) drop-shadow(0 0 40px rgba(201,168,76,0.4));animation:gm-pulse 4s ease-in-out infinite;position:relative;z-index:1;}
+@keyframes gm-pulse{0%,100%{filter:drop-shadow(0 0 16px rgba(201,168,76,0.9)) drop-shadow(0 0 40px rgba(201,168,76,0.4));transform:scale(1)}50%{filter:drop-shadow(0 0 24px rgba(201,168,76,1)) drop-shadow(0 0 60px rgba(201,168,76,0.6));transform:scale(1.05)}}
+.gm-login-title{font-family:'Cinzel',serif!important;font-size:30px!important;font-weight:900!important;letter-spacing:8px!important;color:var(--gold-light)!important;text-shadow:0 0 20px rgba(201,168,76,0.8),0 0 50px rgba(201,168,76,0.3),2px 2px 0 rgba(0,0,0,0.9)!important;margin:0 0 6px 0!important;text-transform:uppercase;}
+.gm-login-subtitle{font-family:'Crimson Text',serif!important;font-size:13px!important;font-style:italic!important;color:rgba(232,223,200,0.5)!important;letter-spacing:3px!important;margin:0!important;}
+.gm-login-sep{display:flex;align-items:center;gap:10px;margin:16px 0 4px;}
+.gm-login-sep::before,.gm-login-sep::after{content:'';flex:1;height:1px;}
+.gm-login-sep::before{background:linear-gradient(90deg,transparent,rgba(201,168,76,0.4));}
+.gm-login-sep::after{background:linear-gradient(90deg,rgba(201,168,76,0.4),transparent);}
+.gm-login-sep span{color:var(--gold);font-size:14px;opacity:0.7;}
+.gm-login-lore{font-family:'Crimson Text',serif;font-size:13px;font-style:italic;color:rgba(232,223,200,0.4);text-align:center;padding:0 8px;line-height:1.6;}
+</style>
+
 <div class="gm-login-wrapper">
-  <div class="gm-login-logo">
-    <span class="gm-login-icon">🎮</span>
-    <h1 class="gm-login-title">GAMEMASTER</h1>
-    <p class="gm-login-subtitle">Serveur de Jeu de Rôle</p>
+
+  <div class="gm-login-seal">
+    <span class="gm-login-icon">⚗️</span>
   </div>
-  <div class="gm-login-lore">
-    <p>⚔️ Entrez dans l'Archive. Votre aventure commence ici.</p>
-  </div>
+
+  <h1 class="gm-login-title">GameMaster</h1>
+  <p class="gm-login-subtitle">L'Archive — Serveur de Jeu de Rôle</p>
+
+  <div class="gm-login-sep"><span>✦</span></div>
+
+  <p class="gm-login-lore">
+    Que votre nom soit inscrit dans les annales.<br>
+    Entrez, aventurier.
+  </p>
+
 </div>
