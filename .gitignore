@@ -1,5 +1,6 @@
 # Secrets
 .env
+docker/mongodb/mongodb-keyfile
 
 # Backups locaux
 backups/
