@@ -20,7 +20,7 @@ services:
       - "443:443"
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./ssl-certs:/etc/nginx/certs:ro
+      - ./ssl-certs:/etc/letsencrypt:ro
       - certbot-www:/var/www/certbot:ro
 
   certbot:
