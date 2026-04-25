@@ -1,0 +1,31 @@
+[flake8]
+# Configuration Flake8 pour GameMaster
+
+# Longueur maximale de ligne
+max-line-length = 100
+
+# Ignorer certaines erreurs
+ignore = 
+    E203,  # whitespace before ':'
+    E501,  # line too long (géré par black)
+    W503,  # line break before binary operator
+
+# Exclure certains fichiers/dossiers
+exclude =
+    .git,
+    __pycache__,
+    venv,
+    env,
+    build,
+    dist,
+    *.egg-info,
+    .pytest_cache,
+    node_modules,
+    rocketchat-app/node_modules
+
+# Complexité maximale
+max-complexity = 10
+
+# Imports
+per-file-ignores =
+    __init__.py:F401

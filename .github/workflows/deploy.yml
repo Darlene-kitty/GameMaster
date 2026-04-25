@@ -1,7 +1,10 @@
-name: Build, Push & Deploy
+name: Build, Test, Push & Deploy
 
 on:
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
 
@@ -10,9 +13,95 @@ env:
   DEPLOY_PATH: /opt/rocket-chat-tps
 
 jobs:
+  # ==========================================
+  # JOB 1: LINT & CODE QUALITY
+  # ==========================================
+  lint:
+    name: Lint & Code Quality
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 black
+      
+      - name: Run Black (formatter check)
+        run: black --check app.py
+        continue-on-error: true
+      
+      - name: Run Flake8 (linter)
+        run: flake8 app.py --max-line-length=100
+        continue-on-error: true
+
+  # ==========================================
+  # JOB 2: TESTS
+  # ==========================================
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Run pytest
+        run: |
+          pytest tests/ -v --cov=app --cov-report=term-missing
+      
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v4
+        continue-on-error: true
+
+  # ==========================================
+  # JOB 3: SECURITY SCAN
+  # ==========================================
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Run Trivy vulnerability scanner (filesystem)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '0'  # Ne pas fail le build sur les vulnérabilités
+      
+      - name: Run Trivy vulnerability scanner (config)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          scan-ref: '.'
+          exit-code: '0'
+
+  # ==========================================
+  # JOB 4: BUILD & PUSH
+  # ==========================================
   build:
     name: Build & Push to AWS ECR
     runs-on: ubuntu-latest
+    needs: [lint, test, security]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     outputs:
       image_uri: ${{ steps.build.outputs.image_uri }}
 
@@ -41,11 +130,29 @@ jobs:
           docker push "$IMAGE_URI"
           docker push "$IMAGE_LATEST"
           echo "image_uri=$IMAGE_URI" >> $GITHUB_OUTPUT
+      
+      - name: Scan Docker image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ steps.login-ecr.outputs.registry }}/${{ env.IMAGE_NAME }}:latest
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          exit-code: '0'
+      
+      - name: Upload Trivy results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v3
+        continue-on-error: true
+        with:
+          sarif_file: 'trivy-results.sarif'
 
+  # ==========================================
+  # JOB 5: DEPLOY
+  # ==========================================
   deploy:
     name: Deploy to EC2
     needs: build
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
       - uses: actions/checkout@v4
@@ -70,3 +177,9 @@ jobs:
 
             # Nettoyage images obsolètes
             docker image prune -f
+            
+            # Healthcheck
+            echo "Waiting for services to be healthy..."
+            sleep 30
+            docker compose ps
+
