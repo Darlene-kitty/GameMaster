@@ -24,8 +24,8 @@ let API_URL = process.env.RC_URL
     ? `${process.env.RC_URL}/api/v1`
     : `${envVars.ROOT_URL || 'http://localhost'}/api/v1`;
 
-// URL de base sans /api/v1 pour Grafana
-const BASE_URL = API_URL.replace('/api/v1', '');
+// URL de base sans /api/v1 — non utilisée directement mais utile pour debug
+// const BASE_URL = API_URL.replace('/api/v1', '');
 
 const ADMIN_USERNAME  = process.env.ADMIN_USERNAME  || envVars.ADMIN_USERNAME  || 'admin';
 const ADMIN_PASS      = process.env.ADMIN_PASS      || envVars.ADMIN_PASS      || 'Admin456!';
