@@ -285,8 +285,8 @@ async function setup() {
         // 6. Utilisateurs de démo
         console.log('\n── Creating demo users...');
         const users = [
-            { name: 'Maître du Jeu', username: 'mj',         email: 'mj@gamemaster.local',        password: 'MJ_Pass123!',     roles: ['admin'] },
-            { name: 'Professeur',    username: 'professeur',  email: 'prof@gamemaster.local',      password: 'Prof_Demo123!',   roles: ['admin'] },
+            { name: 'Maître du Jeu', username: 'mj',         email: 'mj@gamemaster.local',         password: 'MJ_Pass123!',     roles: ['admin'] },
+            { name: 'Professeur',    username: 'professeur',  email: 'tamko.clarence@ieee.org',    password: 'Prof_Demo123!',   roles: ['admin'] },
             { name: 'Guerrier Kael', username: 'guerrier',    email: 'guerrier@gamemaster.local',  password: 'Player_Pass123!', roles: ['user']  },
             { name: 'Mage Lyra',     username: 'mage',        email: 'mage@gamemaster.local',      password: 'Player_Pass123!', roles: ['user']  },
             { name: 'Archer Finn',   username: 'archer',      email: 'archer@gamemaster.local',    password: 'Player_Pass123!', roles: ['user']  },
