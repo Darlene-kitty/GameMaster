@@ -333,3 +333,56 @@ select[class*="rcx"] {
   border-bottom: 1px solid var(--gm-border) !important;
   background: rgba(201,168,76,0.04) !important;
 }
+
+/* ══════════════════════════════════════════
+   FIX ICÔNES SVG
+   ══════════════════════════════════════════ */
+.rcx-icon,
+[class*="rcx-icon"],
+.rcx-icon svg,
+[class*="rcx-icon"] svg {
+  color: #c9a84c !important;
+  fill: currentColor !important;
+}
+
+i[class*="icon-"],
+[class*="rc-icon"],
+[class*="action-link"],
+[class*="toolbar"] svg,
+[class*="button"] svg,
+button svg {
+  color: #c9a84c !important;
+  fill: #c9a84c !important;
+}
+
+/* Icônes toolbar header */
+[class*="room-header"] button svg,
+[class*="RoomHeader"] button svg {
+  color: rgba(201,168,76,0.7) !important;
+  fill: rgba(201,168,76,0.7) !important;
+}
+
+[class*="room-header"] button:hover svg,
+[class*="RoomHeader"] button:hover svg {
+  color: #c9a84c !important;
+  fill: #c9a84c !important;
+}
+
+/* Icônes sidebar */
+[class*="sidebar"] svg,
+[class*="sidebar"] i {
+  color: rgba(201,168,76,0.6) !important;
+  fill: rgba(201,168,76,0.6) !important;
+}
+
+/* Icônes composer */
+[class*="composer"] svg,
+[class*="message-composer"] svg {
+  color: rgba(201,168,76,0.5) !important;
+  fill: rgba(201,168,76,0.5) !important;
+}
+
+[class*="composer"] button:hover svg {
+  color: #c9a84c !important;
+  fill: #c9a84c !important;
+}
