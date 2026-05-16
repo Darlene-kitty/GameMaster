@@ -1,0 +1,626 @@
+/* ============================================
+   GameMaster TPS — CSS Ultra Complet
+   Page Login + Page Messagerie
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --gold: #c9a84c;
+  --gold-light: #f0d080;
+  --gold-dark: #8b6914;
+  --parchment: #e8dfc8;
+  --ink: #1a1510;
+  --stone: #2a2520;
+  --stone-light: #3a342e;
+  --red-dark: #8b1a1a;
+  --shadow: rgba(0,0,0,0.8);
+}
+
+/* ============================================
+   PAGE DE LOGIN
+   ============================================ */
+
+/* Fond de la page login */
+.rcx-box.rcx-box--full.login-page,
+[class*="login"],
+.login-page {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(139,26,26,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(201,168,76,0.1) 0%, transparent 50%),
+    linear-gradient(135deg, #0d0b08 0%, #1a1510 40%, #2a2520 70%, #1a1510 100%) !important;
+  min-height: 100vh !important;
+  position: relative !important;
+}
+
+/* Particules dorées en arrière-plan */
+.login-page::before {
+  content: '⚔️ ✦ 🎲 ✦ 🏰 ✦ 🐉 ✦ ⚗️ ✦ 📜 ✦ 🗡️ ✦ 🔮';
+  position: fixed !important;
+  top: 10px !important;
+  left: 0 !important;
+  right: 0 !important;
+  text-align: center !important;
+  font-size: 20px !important;
+  opacity: 0.15 !important;
+  letter-spacing: 20px !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+/* Carte de login */
+.rcx-box--animated,
+[class*="login-card"],
+.login-card {
+  background: linear-gradient(145deg, rgba(42,37,32,0.98), rgba(26,21,16,0.99)) !important;
+  border: 1px solid rgba(201,168,76,0.4) !important;
+  border-radius: 4px !important;
+  box-shadow:
+    0 0 60px rgba(0,0,0,0.8),
+    0 0 30px rgba(201,168,76,0.1),
+    inset 0 1px 0 rgba(201,168,76,0.1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Ligne dorée en haut de la carte */
+.rcx-box--animated::before,
+.login-card::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 3px !important;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent) !important;
+}
+
+/* Titre de la page login */
+.login-page h1,
+.login-page h2,
+[class*="login"] h1,
+[class*="login"] h2 {
+  font-family: 'Cinzel', serif !important;
+  color: var(--gold-light) !important;
+  letter-spacing: 4px !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 0 20px rgba(201,168,76,0.5) !important;
+}
+
+/* Champs de saisie LOGIN */
+.login-page input,
+.login-page .rcx-input-box,
+[class*="login"] input[type="text"],
+[class*="login"] input[type="password"],
+[class*="login"] input[type="email"] {
+  background: rgba(10,8,5,0.8) !important;
+  border: 1px solid rgba(201,168,76,0.3) !important;
+  border-radius: 3px !important;
+  color: var(--parchment) !important;
+  font-family: 'Crimson Text', serif !important;
+  font-size: 16px !important;
+  padding: 12px 16px !important;
+  transition: all 0.3s !important;
+  width: 100% !important;
+}
+
+.login-page input:focus,
+[class*="login"] input:focus {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.15), 0 0 20px rgba(201,168,76,0.1) !important;
+  outline: none !important;
+  background: rgba(20,16,10,0.9) !important;
+}
+
+.login-page input::placeholder,
+[class*="login"] input::placeholder {
+  color: rgba(232,223,200,0.3) !important;
+  font-style: italic !important;
+}
+
+/* Labels LOGIN */
+.login-page label,
+[class*="login"] label {
+  color: rgba(201,168,76,0.8) !important;
+  font-family: 'Cinzel', serif !important;
+  font-size: 11px !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  margin-bottom: 6px !important;
+  display: block !important;
+}
+
+/* BOUTON DE CONNEXION */
+.login-page button[type="submit"],
+.login-page .rcx-button--primary,
+[class*="login"] button[type="submit"],
+[class*="login"] .rcx-button--primary {
+  background: linear-gradient(135deg, #8b6914, #c9a84c, #f0d080, #c9a84c, #8b6914) !important;
+  background-size: 200% auto !important;
+  border: none !important;
+  border-radius: 3px !important;
+  color: #1a1510 !important;
+  font-family: 'Cinzel', serif !important;
+  font-size: 14px !important;
+  font-weight: 900 !important;
+  letter-spacing: 4px !important;
+  text-transform: uppercase !important;
+  padding: 14px 32px !important;
+  width: 100% !important;
+  cursor: pointer !important;
+  transition: all 0.4s !important;
+  box-shadow: 0 4px 15px rgba(201,168,76,0.3) !important;
+  animation: shimmer 3s linear infinite !important;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+.login-page button[type="submit"]:hover,
+[class*="login"] .rcx-button--primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(201,168,76,0.5) !important;
+}
+
+.login-page button[type="submit"]:active,
+[class*="login"] .rcx-button--primary:active {
+  transform: translateY(0) !important;
+}
+
+/* Lien "Mot de passe oublié" */
+.login-page a,
+[class*="login"] a {
+  color: var(--gold) !important;
+  font-family: 'Crimson Text', serif !important;
+  font-style: italic !important;
+  text-decoration: none !important;
+  transition: color 0.2s !important;
+}
+
+.login-page a:hover,
+[class*="login"] a:hover {
+  color: var(--gold-light) !important;
+  text-decoration: underline !important;
+}
+
+/* ============================================
+   PAGE DE MESSAGERIE
+   ============================================ */
+
+/* Fond général */
+body, html, #root {
+  background: var(--ink) !important;
+  font-family: 'Crimson Text', serif !important;
+}
+
+/* Sidebar */
+.rcx-sidebar--main {
+  background: linear-gradient(180deg, #0d0b08 0%, #1a1510 30%, #2a2520 70%, #1a1510 100%) !important;
+  border-right: 1px solid rgba(201,168,76,0.2) !important;
+}
+
+/* Header de la sidebar */
+.rcx-sidebar-header {
+  background: linear-gradient(90deg, #0d0b08, #1a1510) !important;
+  border-bottom: 1px solid rgba(201,168,76,0.2) !important;
+  padding: 12px 16px !important;
+}
+
+/* Nom du serveur dans la sidebar */
+.rcx-sidebar-header__title {
+  font-family: 'Cinzel', serif !important;
+  color: var(--gold-light) !important;
+  font-size: 15px !important;
+  letter-spacing: 2px !important;
+  text-shadow: 0 0 10px rgba(201,168,76,0.3) !important;
+}
+
+/* Barre de recherche sidebar */
+.rcx-sidebar-search-input {
+  background: rgba(0,0,0,0.4) !important;
+  border: 1px solid rgba(201,168,76,0.2) !important;
+  color: var(--parchment) !important;
+  border-radius: 3px !important;
+}
+
+.rcx-sidebar-search-input:focus {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 2px rgba(201,168,76,0.1) !important;
+}
+
+/* Titres des sections sidebar */
+.rcx-sidebar-section__title {
+  font-family: 'Cinzel', serif !important;
+  color: rgba(201,168,76,0.6) !important;
+  font-size: 10px !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase !important;
+  padding: 8px 16px 4px !important;
+}
+
+/* Items de la sidebar */
+.rcx-sidebar-item {
+  border-radius: 0 !important;
+  transition: all 0.2s !important;
+  border-left: 3px solid transparent !important;
+}
+
+.rcx-sidebar-item:hover {
+  background: rgba(201,168,76,0.08) !important;
+  border-left-color: rgba(201,168,76,0.4) !important;
+}
+
+.rcx-sidebar-item--selected {
+  background: rgba(201,168,76,0.15) !important;
+  border-left-color: var(--gold) !important;
+}
+
+.rcx-sidebar-item__title {
+  font-family: 'Crimson Text', serif !important;
+  color: var(--parchment) !important;
+  font-size: 15px !important;
+}
+
+.rcx-sidebar-item--selected .rcx-sidebar-item__title {
+  color: var(--gold-light) !important;
+  font-weight: 600 !important;
+}
+
+.rcx-sidebar-item__subtitle {
+  color: rgba(232,223,200,0.4) !important;
+  font-size: 12px !important;
+  font-style: italic !important;
+}
+
+/* Badge non-lu */
+.rcx-badge {
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold)) !important;
+  color: var(--ink) !important;
+  font-weight: 900 !important;
+  font-size: 10px !important;
+  min-width: 18px !important;
+  height: 18px !important;
+  border-radius: 9px !important;
+}
+
+/* Header du channel */
+.rcx-room-header {
+  background: linear-gradient(90deg, #0d0b08, #1a1510, #2a2520, #1a1510, #0d0b08) !important;
+  border-bottom: 1px solid rgba(201,168,76,0.25) !important;
+  padding: 10px 20px !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
+}
+
+.rcx-room-header__name {
+  font-family: 'Cinzel', serif !important;
+  color: var(--gold-light) !important;
+  font-size: 17px !important;
+  letter-spacing: 2px !important;
+  text-shadow: 0 0 15px rgba(201,168,76,0.3) !important;
+}
+
+.rcx-room-header__topic {
+  color: rgba(232,223,200,0.5) !important;
+  font-family: 'Crimson Text', serif !important;
+  font-style: italic !important;
+  font-size: 13px !important;
+}
+
+/* Zone des messages */
+.rcx-message-list {
+  background: linear-gradient(180deg, #0d0b08 0%, #1a1510 100%) !important;
+  padding: 8px 0 !important;
+}
+
+/* Message individuel */
+.rcx-message {
+  border-left: 3px solid transparent !important;
+  transition: all 0.2s !important;
+  padding: 6px 20px !important;
+  margin: 2px 0 !important;
+}
+
+.rcx-message:hover {
+  background: rgba(201,168,76,0.04) !important;
+  border-left-color: rgba(201,168,76,0.3) !important;
+}
+
+/* Avatar */
+.rcx-avatar {
+  border: 2px solid rgba(201,168,76,0.2) !important;
+  border-radius: 4px !important;
+  transition: border-color 0.2s !important;
+}
+
+.rcx-message:hover .rcx-avatar {
+  border-color: var(--gold) !important;
+}
+
+/* Nom de l'auteur */
+.rcx-message__name {
+  font-family: 'Cinzel', serif !important;
+  color: var(--gold) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+  cursor: pointer !important;
+  transition: color 0.2s !important;
+}
+
+.rcx-message__name:hover {
+  color: var(--gold-light) !important;
+  text-shadow: 0 0 8px rgba(201,168,76,0.5) !important;
+}
+
+/* Heure du message */
+.rcx-message__time {
+  color: rgba(232,223,200,0.25) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 10px !important;
+}
+
+/* Corps du message */
+.rcx-message__body {
+  color: var(--parchment) !important;
+  font-family: 'Crimson Text', serif !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+}
+
+/* Code dans les messages */
+.rcx-message__body code {
+  background: rgba(0,0,0,0.6) !important;
+  color: var(--gold) !important;
+  border: 1px solid rgba(201,168,76,0.2) !important;
+  border-radius: 3px !important;
+  padding: 1px 6px !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 13px !important;
+}
+
+/* Bloc de code */
+.rcx-message__body pre {
+  background: rgba(0,0,0,0.7) !important;
+  border: 1px solid rgba(201,168,76,0.2) !important;
+  border-left: 3px solid var(--gold) !important;
+  border-radius: 0 4px 4px 0 !important;
+  padding: 12px 16px !important;
+  color: var(--gold-light) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* Attachments (bot messages) */
+.rcx-attachment {
+  background: rgba(0,0,0,0.4) !important;
+  border-left: 3px solid var(--gold) !important;
+  border-radius: 0 4px 4px 0 !important;
+  padding: 10px 14px !important;
+  margin: 4px 0 !important;
+}
+
+.rcx-attachment__title {
+  font-family: 'Cinzel', serif !important;
+  color: var(--gold-light) !important;
+  font-size: 13px !important;
+  letter-spacing: 1px !important;
+}
+
+.rcx-attachment__text {
+  color: var(--parchment) !important;
+  font-family: 'Crimson Text', serif !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+}
+
+/* ============================================
+   BARRE DE SAISIE DES MESSAGES
+   ============================================ */
+
+.rcx-message-composer {
+  background: linear-gradient(180deg, rgba(13,11,8,0.95), rgba(26,21,16,0.98)) !important;
+  border-top: 1px solid rgba(201,168,76,0.2) !important;
+  padding: 12px 16px !important;
+}
+
+/* Zone de texte principale */
+.rcx-message-composer__input,
+.rcx-input-box--message {
+  background: rgba(0,0,0,0.5) !important;
+  border: 1px solid rgba(201,168,76,0.25) !important;
+  border-radius: 4px !important;
+  color: var(--parchment) !important;
+  font-family: 'Crimson Text', serif !important;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+  padding: 10px 14px !important;
+  transition: all 0.3s !important;
+  min-height: 44px !important;
+}
+
+.rcx-message-composer__input:focus,
+.rcx-input-box--message:focus {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 2px rgba(201,168,76,0.12), 0 0 15px rgba(201,168,76,0.05) !important;
+  background: rgba(0,0,0,0.7) !important;
+  outline: none !important;
+}
+
+.rcx-message-composer__input::placeholder,
+.rcx-input-box--message::placeholder {
+  color: rgba(232,223,200,0.25) !important;
+  font-style: italic !important;
+}
+
+/* Boutons de la barre de saisie */
+.rcx-message-composer__toolbar-button,
+.rcx-button-group--message-composer button {
+  color: rgba(201,168,76,0.5) !important;
+  transition: all 0.2s !important;
+  border-radius: 3px !important;
+}
+
+.rcx-message-composer__toolbar-button:hover,
+.rcx-button-group--message-composer button:hover {
+  color: var(--gold) !important;
+  background: rgba(201,168,76,0.1) !important;
+}
+
+/* Bouton ENVOYER */
+.rcx-message-composer__send,
+button[aria-label="Send"],
+.rcx-button--send {
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold)) !important;
+  border: none !important;
+  border-radius: 4px !important;
+  color: var(--ink) !important;
+  font-weight: 900 !important;
+  padding: 8px 16px !important;
+  transition: all 0.3s !important;
+  box-shadow: 0 2px 8px rgba(201,168,76,0.3) !important;
+}
+
+.rcx-message-composer__send:hover,
+button[aria-label="Send"]:hover {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light)) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 15px rgba(201,168,76,0.5) !important;
+}
+
+/* ============================================
+   TOOLBAR DES MESSAGES (réactions, répondre...)
+   ============================================ */
+
+.rcx-message-toolbar {
+  background: rgba(26,21,16,0.97) !important;
+  border: 1px solid rgba(201,168,76,0.2) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important;
+}
+
+.rcx-message-toolbar__item {
+  color: rgba(201,168,76,0.6) !important;
+  transition: all 0.2s !important;
+}
+
+.rcx-message-toolbar__item:hover {
+  color: var(--gold) !important;
+  background: rgba(201,168,76,0.1) !important;
+}
+
+/* ============================================
+   MODALS ET POPUPS
+   ============================================ */
+
+.rcx-modal {
+  background: linear-gradient(145deg, #2a2520, #1a1510) !important;
+  border: 1px solid rgba(201,168,76,0.3) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 30px rgba(201,168,76,0.1) !important;
+}
+
+.rcx-modal__header {
+  background: linear-gradient(90deg, #1a1510, #2a2520) !important;
+  border-bottom: 1px solid rgba(201,168,76,0.2) !important;
+  padding: 16px 20px !important;
+}
+
+.rcx-modal__title {
+  font-family: 'Cinzel', serif !important;
+  color: var(--gold-light) !important;
+  letter-spacing: 2px !important;
+}
+
+/* ============================================
+   DROPDOWNS ET MENUS
+   ============================================ */
+
+.rcx-option {
+  transition: background 0.15s !important;
+}
+
+.rcx-option:hover {
+  background: rgba(201,168,76,0.1) !important;
+}
+
+.rcx-option__title {
+  color: var(--parchment) !important;
+  font-family: 'Crimson Text', serif !important;
+  font-size: 14px !important;
+}
+
+.rcx-option__icon {
+  color: var(--gold) !important;
+}
+
+/* ============================================
+   SCROLLBAR GLOBALE
+   ============================================ */
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #0d0b08; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--gold-dark), var(--gold));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--gold-light); }
+
+/* ============================================
+   BOUTONS GÉNÉRAUX
+   ============================================ */
+
+.rcx-button--primary {
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold)) !important;
+  color: var(--ink) !important;
+  font-family: 'Cinzel', serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+  border: none !important;
+  transition: all 0.3s !important;
+}
+
+.rcx-button--primary:hover {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light)) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 15px rgba(201,168,76,0.4) !important;
+}
+
+.rcx-button--secondary {
+  background: rgba(201,168,76,0.1) !important;
+  border: 1px solid rgba(201,168,76,0.3) !important;
+  color: var(--gold) !important;
+  font-family: 'Cinzel', serif !important;
+  transition: all 0.3s !important;
+}
+
+.rcx-button--secondary:hover {
+  background: rgba(201,168,76,0.2) !important;
+  border-color: var(--gold) !important;
+}
+
+/* ============================================
+   TAGS ET BADGES
+   ============================================ */
+
+.rcx-tag {
+  background: rgba(201,168,76,0.15) !important;
+  color: var(--gold-light) !important;
+  border: 1px solid rgba(201,168,76,0.3) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 11px !important;
+  border-radius: 3px !important;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.rcx-message {
+  animation: fadeInUp 0.2s ease-out !important;
+}

@@ -1,0 +1,378 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    /* Variables Eldritch Forge (Mockup #111214) */
+    --rcx-color-surface: #111214; /* Deep dark black/purple */
+    --rcx-color-surface-hover: #1e1e24; /* Embed background */
+    --rcx-color-surface-sidebar: #0f1012;
+    --rcx-color-surface-light: #1e1e24;
+    --rcx-color-surface-dark: #0a0b0d;
+
+    --rcx-color-font-default: #e0d8e8;
+    --rcx-color-font-titles: #f39c12; /* Bright Orange titles */
+    --rcx-color-font-info: #a395b3;
+
+    /* Eldritch Orange Accent */
+    --rcx-color-primary-500: #e67e22; 
+    --rcx-color-primary-600: #d35400;
+    --rcx-color-primary-700: #c0392b;
+    
+    --rcx-button-colors-primary-background: #e67e22;
+    --rcx-button-colors-primary-background-hover: #d35400;
+    --rcx-button-colors-primary-background-active: #c0392b;
+
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+/* Global Font Apply */
+body, .rcx-box, .rcx-sidebar-item {
+    font-family: 'Inter', 'Whitney', sans-serif !important;
+}
+
+/* Global Layout Overrides for Dark Discord Feel */
+body, .rcx-css-1qxtzyp {
+    background-color: var(--rcx-color-surface) !important;
+    color: var(--rcx-color-font-default) !important;
+}
+
+/* ============================================
+   SCROLLBAR PERSONNALISÉE (Style Discord)
+   ============================================ */
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--rcx-color-surface-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #1e1f22;
+    border-radius: 8px;
+    border: 4px solid var(--rcx-color-surface-dark);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #2e3035;
+}
+
+/* ============================================
+   SIDEBAR STYLING
+   ============================================ */
+aside.rcx-sidebar, .rc-old .sidebar {
+    background-color: var(--rcx-color-surface-sidebar) !important;
+}
+
+/* Sidebar items hover effects like Discord */
+.rcx-sidebar-item {
+    border-radius: 4px !important;
+    margin: 1px 8px !important;
+    color: var(--rcx-color-font-info) !important;
+    transition: background-color 0.1s ease-out, color 0.1s ease-out;
+}
+.rcx-sidebar-item:hover {
+    background-color: rgba(79,84,92,0.32) !important;
+    color: var(--rcx-color-font-default) !important;
+}
+.rcx-sidebar-item--selected {
+    background-color: rgba(79,84,92,0.48) !important;
+    color: var(--rcx-color-font-titles) !important;
+}
+
+/* Active Indicator */
+.rcx-badge--primary {
+    background-color: var(--rcx-color-primary-500) !important;
+}
+
+/* ============================================
+   RÔLES UTILISATEURS (Couleurs améliorées)
+   ============================================ */
+.rcx-message-header__name[title="MJ"] {
+    color: #ffd43b !important; /* Jaune doré */
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(255, 212, 59, 0.3);
+}
+
+.rcx-message-header__name[title="Guerrier"] {
+    color: #ff6b6b !important; /* Rouge vif */
+    font-weight: 600;
+}
+
+.rcx-message-header__name[title="Archer"] {
+    color: #4dabf7 !important; /* Bleu clair */
+    font-weight: 600;
+}
+
+.rcx-message-header__name[title="Joueur"] {
+    color: #a395b3 !important; /* Gris violet */
+    font-weight: 500;
+}
+
+.rcx-message-header__name[title="GAMEMASTER BOT"],
+.rcx-message-header__name[title="🎮 GameMaster"] {
+    color: var(--rcx-color-primary-500) !important;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* ============================================
+   INDICATEURS DE STATUT
+   ============================================ */
+.rcx-user-status--online::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #43b581; /* Vert Discord */
+    margin-right: 6px;
+    box-shadow: 0 0 4px #43b581;
+}
+
+.rcx-user-status--away::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #faa61a; /* Orange */
+    margin-right: 6px;
+}
+
+.rcx-user-status--busy::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #f04747; /* Rouge */
+    margin-right: 6px;
+}
+
+/* ============================================
+   MESSAGES
+   ============================================ */
+.rcx-message, .rc-message-box {
+    background-color: transparent !important;
+}
+.rcx-message:hover {
+    background-color: rgba(4,4,5,0.07) !important;
+}
+
+/* Style spécial pour les messages du GameMaster Bot */
+.rcx-message[data-username*="GAMEMASTER"] .rcx-message-body,
+.rcx-message[data-username*="GameMaster"] .rcx-message-body {
+    background: linear-gradient(135deg, rgba(230, 126, 34, 0.1) 0%, rgba(211, 84, 0, 0.05) 100%);
+    border-radius: 8px;
+    padding: 12px;
+    border-left: 4px solid var(--rcx-color-primary-500);
+    box-shadow: 0 2px 8px rgba(230, 126, 34, 0.1);
+}
+
+/* Avatar du bot avec effet lumineux */
+.rcx-message[data-username*="GAMEMASTER"] .rcx-avatar,
+.rcx-message[data-username*="GameMaster"] .rcx-avatar {
+    border: 2px solid var(--rcx-color-primary-500);
+    box-shadow: 0 0 10px rgba(230, 126, 34, 0.5);
+    border-radius: 50%;
+}
+
+/* Animation subtile pour les messages du bot */
+@keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 5px rgba(230, 126, 34, 0.3); }
+    50% { box-shadow: 0 0 15px rgba(230, 126, 34, 0.6); }
+}
+
+.rcx-message[data-username*="GAMEMASTER"],
+.rcx-message[data-username*="GameMaster"] {
+    animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* ============================================
+   MESSAGE INPUT AREA
+   ============================================ */
+.rc-message-box__container, .rcx-text-input {
+    background-color: #383a40 !important;
+    border: none !important;
+}
+.rc-message-box__container {
+    border-radius: 8px !important;
+    padding: 2px 0px !important;
+    transition: box-shadow 0.2s ease;
+}
+.rc-message-box__container:focus-within {
+    box-shadow: 0 0 0 2px var(--rcx-color-primary-500);
+}
+.rcx-text-input {
+    color: var(--rcx-color-font-default) !important;
+}
+.rcx-text-input:focus {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* ============================================
+   TOP HEADER BAR
+   ============================================ */
+header.rcx-box {
+    background-color: var(--rcx-color-surface) !important;
+    border-bottom: 1px solid #1e1f22 !important;
+    box-shadow: 0 1px 0 rgba(4,4,5,0.2), 0 1.5px 0 rgba(6,6,7,0.05), 0 2px 0 rgba(4,4,5,0.05);
+}
+
+/* ============================================
+   MENTIONS
+   ============================================ */
+span.mention-link {
+    background-color: rgba(88, 101, 242, 0.3) !important;
+    color: #c9cdfb !important;
+    border-radius: 3px !important;
+    padding: 0 2px !important;
+    transition: all 0.1s ease;
+}
+span.mention-link:hover {
+    background-color: var(--rcx-color-primary-500) !important;
+    color: #ffffff !important;
+    cursor: pointer;
+}
+
+/* ============================================
+   BOUTONS
+   ============================================ */
+.rcx-button {
+    transition: all 0.2s ease;
+}
+.rcx-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(230, 126, 34, 0.4);
+}
+.rcx-button:active {
+    transform: translateY(0);
+}
+
+/* ============================================
+   ATTACHMENTS & EMBEDS
+   ============================================ */
+.rcx-attachment {
+    background-color: var(--rcx-color-surface-hover) !important;
+    border-left: 4px solid var(--rcx-color-primary-500) !important;
+    border-radius: 4px;
+    padding: 12px;
+}
+
+.rcx-attachment__title {
+    color: var(--rcx-color-font-titles) !important;
+    font-weight: 600;
+}
+
+/* ============================================
+   CODE BLOCKS
+   ============================================ */
+code {
+    background-color: #2f3136 !important;
+    color: #dcddde !important;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+pre code {
+    display: block;
+    padding: 12px;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 768px) {
+    .rcx-sidebar-item {
+        margin: 2px 4px !important;
+        font-size: 14px;
+    }
+    
+    .rc-message-box__container {
+        border-radius: 4px !important;
+    }
+    
+    .rcx-message {
+        padding: 8px 12px !important;
+    }
+    
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    .rcx-message[data-username*="GAMEMASTER"] .rcx-message-body,
+    .rcx-message[data-username*="GameMaster"] .rcx-message-body {
+        padding: 8px;
+    }
+}
+
+/* ============================================
+   ANIMATIONS SUPPLÉMENTAIRES
+   ============================================ */
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.rcx-message {
+    animation: slide-in 0.2s ease-out;
+}
+
+/* ============================================
+   TOOLTIPS
+   ============================================ */
+.rcx-tooltip {
+    background-color: #18191c !important;
+    color: var(--rcx-color-font-default) !important;
+    border-radius: 4px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+}
+
+/* ============================================
+   MODALS
+   ============================================ */
+.rcx-modal {
+    background-color: var(--rcx-color-surface) !important;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+}
+
+.rcx-modal__header {
+    background-color: var(--rcx-color-surface-dark) !important;
+    border-bottom: 1px solid #1e1f22;
+}
+
+/* ============================================
+   BADGES & TAGS
+   ============================================ */
+.rcx-tag {
+    background-color: var(--rcx-color-primary-500) !important;
+    color: #ffffff !important;
+    border-radius: 3px;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.rcx-loading {
+    animation: spin 1s linear infinite;
+}
