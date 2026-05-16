@@ -1,119 +1,335 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* ============================================
+   THÈME GLOBAL — GameMaster : The Archive
+   Compatible Rocket.Chat 6.x → 8.x
+   ============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
 
+/* ══════════════════════════════════════════
+   VARIABLES RCX (Rocket.Chat 8.x tokens)
+   ══════════════════════════════════════════ */
 :root {
-    /* Variables Eldritch Forge (Mockup #111214) */
-    --rcx-color-surface: #111214; /* Deep dark black/purple */
-    --rcx-color-surface-hover: #1e1e24; /* Embed background */
-    --rcx-color-surface-sidebar: #0f1012;
-    --rcx-color-surface-light: #1e1e24;
-    --rcx-color-surface-dark: #0a0b0d;
+  /* Surfaces */
+  --rcx-color-surface-room:           #1a1510 !important;
+  --rcx-color-surface-light:          #111009 !important;
+  --rcx-color-surface-tint:           #252018 !important;
+  --rcx-color-surface-neutral:        #1a1510 !important;
+  --rcx-color-surface-disabled:       #0e0c09 !important;
+  --rcx-color-surface-hover:          rgba(201,168,76,0.07) !important;
+  --rcx-color-surface-selected:       rgba(201,168,76,0.12) !important;
 
-    --rcx-color-font-default: #e0d8e8;
-    --rcx-color-font-titles: #f39c12; /* Bright Orange titles */
-    --rcx-color-font-info: #a395b3;
+  /* Foreground */
+  --rcx-color-foreground-default:     #e8dfc8 !important;
+  --rcx-color-foreground-info:        #c9a84c !important;
+  --rcx-color-foreground-hint:        rgba(232,223,200,0.5) !important;
+  --rcx-color-foreground-disabled:    rgba(232,223,200,0.3) !important;
 
-    /* Eldritch Orange Accent */
-    --rcx-color-primary-500: #e67e22; 
-    --rcx-color-primary-600: #d35400;
-    --rcx-color-primary-700: #c0392b;
-    
-    --rcx-button-colors-primary-background: #e67e22;
-    --rcx-button-colors-primary-background-hover: #d35400;
-    --rcx-button-colors-primary-background-active: #c0392b;
+  /* Strokes */
+  --rcx-color-stroke-light:           rgba(201,168,76,0.18) !important;
+  --rcx-color-stroke-medium:          rgba(201,168,76,0.30) !important;
+  --rcx-color-stroke-dark:            rgba(201,168,76,0.45) !important;
+  --rcx-color-stroke-extra-light:     rgba(201,168,76,0.10) !important;
 
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
-}
+  /* Brand */
+  --rcx-color-button-background-primary-default:  #c9a84c !important;
+  --rcx-color-button-background-primary-hover:    #f0d080 !important;
+  --rcx-color-button-foreground-primary-default:  #0e0c09 !important;
 
-/* Global Font Apply */
-body, .rcx-box, .rcx-sidebar-item {
-    font-family: 'Inter', 'Whitney', sans-serif !important;
-}
-
-/* Global Layout Overrides for Dark Discord Feel */
-body, .rcx-css-1qxtzyp {
-    background-color: var(--rcx-color-surface) !important;
-    color: var(--rcx-color-font-default) !important;
-}
-
-/* Sidebar Styling (Server list / Channels) */
-aside.rcx-sidebar, .rc-old .sidebar {
-    background-color: var(--rcx-color-surface-sidebar) !important;
-}
-
-/* Sidebar items hover effects like Discord */
-.rcx-sidebar-item {
-    border-radius: 4px !important;
-    margin: 1px 8px !important;
-    color: var(--rcx-color-font-info) !important;
-    transition: background-color 0.1s ease-out, color 0.1s ease-out;
-}
-.rcx-sidebar-item:hover {
-    background-color: rgba(79,84,92,0.32) !important;
-    color: var(--rcx-color-font-default) !important;
-}
-.rcx-sidebar-item--selected {
-    background-color: rgba(79,84,92,0.48) !important;
-    color: var(--rcx-color-font-titles) !important;
+  /* Custom */
+  --gm-gold:          #c9a84c;
+  --gm-gold-light:    #f0d080;
+  --gm-gold-dim:      rgba(201,168,76,0.15);
+  --gm-ember:         #8b2500;
+  --gm-parchment:     #e8dfc8;
+  --gm-parchment-dim: rgba(232,223,200,0.6);
+  --gm-ink:           #0e0c09;
+  --gm-stone-dark:    #111009;
+  --gm-stone:         #1a1510;
+  --gm-stone-mid:     #252018;
+  --gm-stone-light:   #332d24;
+  --gm-border:        rgba(201,168,76,0.18);
+  --gm-border-hover:  rgba(201,168,76,0.45);
+  --gm-touch-min:     44px;
 }
 
-/* Active Indicator */
-.rcx-badge--primary {
-    background-color: var(--rcx-color-primary-500) !important;
+/* ══════════════════════════════════════════
+   FOND GLOBAL
+   ══════════════════════════════════════════ */
+body,
+html,
+#root,
+.rcx-box.rcx-box--full,
+[class*="main-content"],
+[class*="room-container"],
+main {
+  background-color: var(--gm-stone-dark) !important;
+  color: var(--gm-parchment) !important;
+  font-family: 'Crimson Text', Georgia, serif !important;
 }
 
-/* User Name Role Colors */
-/* Note: :contains() n'est pas CSS standard, on cible via attribut title uniquement */
-.rcx-message-header__name[title="Guerrier"] {
-    color: #e74c3c !important; /* Red */
-}
-.rcx-message-header__name[title="Archer"] {
-    color: #3498db !important; /* Blue */
-}
-.rcx-message-header__name[title="GAMEMASTER BOT"],
-.rcx-message-header__name[title="🎮 GameMaster"] {
-    color: var(--rcx-color-primary-500) !important;
-    text-transform: uppercase;
+/* Fond blanc résiduel */
+.rcx-tile,
+[class*="rcx-tile"],
+[class*="homepage"],
+[class*="home-page"],
+.page-content,
+[class*="page-content"] {
+  background-color: var(--gm-stone) !important;
+  color: var(--gm-parchment) !important;
 }
 
-/* Message Box */
-.rcx-message, .rc-message-box {
-    background-color: transparent !important;
+/* Cards home page */
+[class*="card"],
+.rcx-card {
+  background: var(--gm-stone-mid) !important;
+  border: 1px solid var(--gm-border) !important;
+  color: var(--gm-parchment) !important;
 }
+
+/* ══════════════════════════════════════════
+   SIDEBAR
+   ══════════════════════════════════════════ */
+.rcx-sidebar,
+[class*="sidebar"],
+nav[class*="sidebar"] {
+  background: linear-gradient(180deg, #141009 0%, #0e0c07 100%) !important;
+  border-right: 1px solid var(--gm-border) !important;
+}
+
+[class*="sidebar-header"],
+[class*="SidebarHeader"] {
+  background: linear-gradient(135deg, #1a1510, #111009) !important;
+  border-bottom: 1px solid var(--gm-border) !important;
+  min-height: var(--gm-touch-min) !important;
+}
+
+[class*="sidebar-item"],
+[class*="SidebarItem"] {
+  border-radius: 2px !important;
+  transition: background 0.15s !important;
+  min-height: var(--gm-touch-min) !important;
+}
+
+[class*="sidebar-item"]:hover,
+[class*="SidebarItem"]:hover {
+  background: rgba(201,168,76,0.07) !important;
+}
+
+[class*="sidebar-item--selected"],
+[class*="sidebar-item"][aria-selected="true"] {
+  background: rgba(201,168,76,0.12) !important;
+  border-left: 2px solid var(--gm-gold) !important;
+}
+
+[class*="sidebar-section-title"],
+[class*="SidebarSection"] h4 {
+  font-family: 'Cinzel', serif !important;
+  font-size: 10px !important;
+  letter-spacing: 3px !important;
+  color: rgba(201,168,76,0.5) !important;
+  text-transform: uppercase !important;
+}
+
+/* ══════════════════════════════════════════
+   HEADER DE ROOM
+   ══════════════════════════════════════════ */
+[class*="room-header"],
+[class*="RoomHeader"],
+header[class*="room"] {
+  background: linear-gradient(180deg, #1a1510, #161209) !important;
+  border-bottom: 1px solid var(--gm-border) !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.4) !important;
+  min-height: var(--gm-touch-min) !important;
+}
+
+[class*="room-header"] h1,
+[class*="RoomHeader"] h1 {
+  font-family: 'Cinzel', serif !important;
+  color: var(--gm-gold-light) !important;
+  letter-spacing: 2px !important;
+}
+
+/* ══════════════════════════════════════════
+   MESSAGES
+   ══════════════════════════════════════════ */
+[class*="message"],
+.rcx-message {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(201,168,76,0.05) !important;
+  padding: 6px 12px !important;
+}
+
+[class*="message"]:hover,
 .rcx-message:hover {
-    background-color: rgba(4,4,5,0.07) !important;
+  background: rgba(201,168,76,0.04) !important;
 }
 
-/* Message Input Area */
-.rc-message-box__container, .rcx-text-input {
-    background-color: #383a40 !important;
-    border: none !important;
-}
-.rc-message-box__container {
-    border-radius: 8px !important;
-    padding: 2px 0px !important;
-}
-.rcx-text-input {
-    color: var(--rcx-color-font-default) !important;
-}
-.rcx-text-input:focus {
-    border: none !important;
-    box-shadow: none !important;
+[class*="message"] p,
+.rcx-message p {
+  font-family: 'Crimson Text', serif !important;
+  font-size: 16px !important;
+  color: var(--gm-parchment) !important;
+  line-height: 1.6 !important;
 }
 
-/* Top Header Bar */
-header.rcx-box {
-    background-color: var(--rcx-color-surface) !important;
-    border-bottom: 1px solid #1e1f22 !important;
+[class*="message-username"],
+.rcx-message [class*="username"] {
+  font-family: 'Cinzel', serif !important;
+  font-size: 12px !important;
+  color: var(--gm-gold) !important;
+  letter-spacing: 1px !important;
 }
 
-/* Mentions style */
-span.mention-link {
-    background-color: rgba(88, 101, 242, 0.3) !important;
-    color: #c9cdfb !important;
-    border-radius: 3px !important;
-    padding: 0 2px !important;
+time, [class*="timestamp"] {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 10px !important;
+  color: rgba(201,168,76,0.35) !important;
 }
-span.mention-link:hover {
-    background-color: var(--rcx-color-primary-500) !important;
-    color: #ffffff !important;
+
+code {
+  background: rgba(0,0,0,0.5) !important;
+  color: var(--gm-gold) !important;
+  border: 1px solid rgba(201,168,76,0.25) !important;
+  border-radius: 2px !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 13px !important;
+  padding: 1px 6px !important;
+}
+
+pre, pre code {
+  background: rgba(0,0,0,0.6) !important;
+  border: 1px solid var(--gm-border) !important;
+  border-left: 3px solid var(--gm-gold) !important;
+  color: var(--gm-parchment) !important;
+}
+
+/* ══════════════════════════════════════════
+   BARRE DE SAISIE
+   ══════════════════════════════════════════ */
+[class*="message-composer"],
+[class*="MessageComposer"],
+[class*="composer"] {
+  background: linear-gradient(180deg, #161209, #111009) !important;
+  border-top: 1px solid var(--gm-border) !important;
+  padding: 10px 12px !important;
+}
+
+[class*="composer"] [contenteditable],
+[class*="message-input"] {
+  background: rgba(10,8,6,0.8) !important;
+  border: 1px solid rgba(201,168,76,0.2) !important;
+  border-radius: 2px !important;
+  color: var(--gm-parchment) !important;
+  font-family: 'Crimson Text', serif !important;
+  font-size: 16px !important;
+  min-height: 40px !important;
+  padding: 8px 12px !important;
+}
+
+/* ══════════════════════════════════════════
+   BOUTONS
+   ══════════════════════════════════════════ */
+.rcx-button--primary,
+[class*="button--primary"] {
+  background: linear-gradient(135deg, #7a5c10, var(--gm-gold), #7a5c10) !important;
+  border: 1px solid rgba(201,168,76,0.4) !important;
+  color: var(--gm-ink) !important;
+  font-family: 'Cinzel', serif !important;
+  font-size: 11px !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  min-height: var(--gm-touch-min) !important;
+}
+
+.rcx-button--secondary,
+[class*="button--secondary"] {
+  background: rgba(201,168,76,0.06) !important;
+  border: 1px solid var(--gm-border) !important;
+  color: var(--gm-parchment-dim) !important;
+  font-family: 'Cinzel', serif !important;
+  min-height: var(--gm-touch-min) !important;
+}
+
+/* ══════════════════════════════════════════
+   TEXTE GÉNÉRAL
+   ══════════════════════════════════════════ */
+p, span, div, li, td, th {
+  color: var(--gm-parchment) !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cinzel', serif !important;
+  color: var(--gm-gold-light) !important;
+}
+
+a {
+  color: var(--gm-gold) !important;
+}
+
+a:hover {
+  color: var(--gm-gold-light) !important;
+}
+
+/* ══════════════════════════════════════════
+   INPUTS
+   ══════════════════════════════════════════ */
+.rcx-input-box,
+.rcx-input-box__input,
+input[class*="rcx"],
+select[class*="rcx"] {
+  background: rgba(10,8,6,0.8) !important;
+  border: 1px solid rgba(201,168,76,0.2) !important;
+  color: var(--gm-parchment) !important;
+  font-family: 'Crimson Text', serif !important;
+  font-size: 16px !important;
+  min-height: var(--gm-touch-min) !important;
+}
+
+/* ══════════════════════════════════════════
+   SCROLLBAR
+   ══════════════════════════════════════════ */
+::-webkit-scrollbar       { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.25); }
+::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.22); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(201,168,76,0.42); }
+
+/* ══════════════════════════════════════════
+   BADGES & AVATARS
+   ══════════════════════════════════════════ */
+[class*="badge"], .rcx-badge {
+  background: var(--gm-ember) !important;
+  color: var(--gm-parchment) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 10px !important;
+  border-radius: 2px !important;
+}
+
+[class*="avatar"], .rcx-avatar {
+  border: 1px solid rgba(201,168,76,0.28) !important;
+  border-radius: 2px !important;
+}
+
+/* ══════════════════════════════════════════
+   SÉPARATEURS DE DATE
+   ══════════════════════════════════════════ */
+[class*="date-separator"],
+[class*="DateSeparator"] {
+  color: rgba(201,168,76,0.4) !important;
+  font-family: 'Cinzel', serif !important;
+  font-size: 10px !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase !important;
+}
+
+/* ══════════════════════════════════════════
+   MODALES
+   ══════════════════════════════════════════ */
+.rcx-modal, [class*="modal"] {
+  background: linear-gradient(160deg, #1a1510, #111009) !important;
+  border: 1px solid var(--gm-border) !important;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.8) !important;
+}
+
+[class*="modal-header"], .rcx-modal__header {
+  border-bottom: 1px solid var(--gm-border) !important;
+  background: rgba(201,168,76,0.04) !important;
 }
