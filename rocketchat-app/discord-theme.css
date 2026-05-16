@@ -1,14 +1,40 @@
 /* ============================================
    THÈME GLOBAL — GameMaster : The Archive
-   Mobile-first — Interface Rocket.Chat
+   Compatible Rocket.Chat 6.x → 8.x
    ============================================ */
-
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
 
 /* ══════════════════════════════════════════
-   VARIABLES
-══════════════════════════════════════════ */
+   VARIABLES RCX (Rocket.Chat 8.x tokens)
+   ══════════════════════════════════════════ */
 :root {
+  /* Surfaces */
+  --rcx-color-surface-room:           #1a1510 !important;
+  --rcx-color-surface-light:          #111009 !important;
+  --rcx-color-surface-tint:           #252018 !important;
+  --rcx-color-surface-neutral:        #1a1510 !important;
+  --rcx-color-surface-disabled:       #0e0c09 !important;
+  --rcx-color-surface-hover:          rgba(201,168,76,0.07) !important;
+  --rcx-color-surface-selected:       rgba(201,168,76,0.12) !important;
+
+  /* Foreground */
+  --rcx-color-foreground-default:     #e8dfc8 !important;
+  --rcx-color-foreground-info:        #c9a84c !important;
+  --rcx-color-foreground-hint:        rgba(232,223,200,0.5) !important;
+  --rcx-color-foreground-disabled:    rgba(232,223,200,0.3) !important;
+
+  /* Strokes */
+  --rcx-color-stroke-light:           rgba(201,168,76,0.18) !important;
+  --rcx-color-stroke-medium:          rgba(201,168,76,0.30) !important;
+  --rcx-color-stroke-dark:            rgba(201,168,76,0.45) !important;
+  --rcx-color-stroke-extra-light:     rgba(201,168,76,0.10) !important;
+
+  /* Brand */
+  --rcx-color-button-background-primary-default:  #c9a84c !important;
+  --rcx-color-button-background-primary-hover:    #f0d080 !important;
+  --rcx-color-button-foreground-primary-default:  #0e0c09 !important;
+
+  /* Custom */
   --gm-gold:          #c9a84c;
   --gm-gold-light:    #f0d080;
   --gm-gold-dim:      rgba(201,168,76,0.15);
@@ -22,22 +48,46 @@
   --gm-stone-light:   #332d24;
   --gm-border:        rgba(201,168,76,0.18);
   --gm-border-hover:  rgba(201,168,76,0.45);
-  /* Touch targets */
   --gm-touch-min:     44px;
 }
 
 /* ══════════════════════════════════════════
    FOND GLOBAL
-══════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 body,
-.rcx-box.rcx-box--full {
+html,
+#root,
+.rcx-box.rcx-box--full,
+[class*="main-content"],
+[class*="room-container"],
+main {
   background-color: var(--gm-stone-dark) !important;
+  color: var(--gm-parchment) !important;
   font-family: 'Crimson Text', Georgia, serif !important;
+}
+
+/* Fond blanc résiduel */
+.rcx-tile,
+[class*="rcx-tile"],
+[class*="homepage"],
+[class*="home-page"],
+.page-content,
+[class*="page-content"] {
+  background-color: var(--gm-stone) !important;
+  color: var(--gm-parchment) !important;
+}
+
+/* Cards home page */
+[class*="card"],
+.rcx-card {
+  background: var(--gm-stone-mid) !important;
+  border: 1px solid var(--gm-border) !important;
+  color: var(--gm-parchment) !important;
 }
 
 /* ══════════════════════════════════════════
    SIDEBAR
-══════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 .rcx-sidebar,
 [class*="sidebar"],
 nav[class*="sidebar"] {
@@ -50,14 +100,6 @@ nav[class*="sidebar"] {
   background: linear-gradient(135deg, #1a1510, #111009) !important;
   border-bottom: 1px solid var(--gm-border) !important;
   min-height: var(--gm-touch-min) !important;
-}
-
-[class*="sidebar-header"] span,
-[class*="sidebar-header"] p,
-[class*="SidebarHeader"] span {
-  font-family: 'Cinzel', serif !important;
-  color: var(--gm-gold-light) !important;
-  letter-spacing: 1px !important;
 }
 
 [class*="sidebar-item"],
@@ -73,28 +115,13 @@ nav[class*="sidebar"] {
 }
 
 [class*="sidebar-item--selected"],
-[class*="SidebarItem--selected"],
 [class*="sidebar-item"][aria-selected="true"] {
   background: rgba(201,168,76,0.12) !important;
   border-left: 2px solid var(--gm-gold) !important;
 }
 
-[class*="sidebar-item"] span,
-[class*="SidebarItem"] span,
-[class*="sidebar-item"] p {
-  color: var(--gm-parchment-dim) !important;
-  font-family: 'Crimson Text', serif !important;
-  font-size: 15px !important;
-}
-
-[class*="sidebar-item--selected"] span,
-[class*="sidebar-item"][aria-selected="true"] span {
-  color: var(--gm-parchment) !important;
-}
-
 [class*="sidebar-section-title"],
-[class*="SidebarSection"] h4,
-[class*="sidebar-section"] span {
+[class*="SidebarSection"] h4 {
   font-family: 'Cinzel', serif !important;
   font-size: 10px !important;
   letter-spacing: 3px !important;
@@ -103,15 +130,8 @@ nav[class*="sidebar"] {
 }
 
 /* ══════════════════════════════════════════
-   ZONE DE MESSAGES
-══════════════════════════════════════════ */
-.rcx-room,
-[class*="room-container"],
-[class*="main-content"],
-main {
-  background: var(--gm-stone) !important;
-}
-
+   HEADER DE ROOM
+   ══════════════════════════════════════════ */
 [class*="room-header"],
 [class*="RoomHeader"],
 header[class*="room"] {
@@ -122,20 +142,19 @@ header[class*="room"] {
 }
 
 [class*="room-header"] h1,
-[class*="room-header"] span[class*="title"],
 [class*="RoomHeader"] h1 {
   font-family: 'Cinzel', serif !important;
   color: var(--gm-gold-light) !important;
   letter-spacing: 2px !important;
-  font-size: 15px !important;
 }
 
+/* ══════════════════════════════════════════
+   MESSAGES
+   ══════════════════════════════════════════ */
 [class*="message"],
 .rcx-message {
   background: transparent !important;
   border-bottom: 1px solid rgba(201,168,76,0.05) !important;
-  transition: background 0.15s !important;
-  /* Padding confortable sur mobile */
   padding: 6px 12px !important;
 }
 
@@ -145,7 +164,6 @@ header[class*="room"] {
 }
 
 [class*="message"] p,
-[class*="message-body"],
 .rcx-message p {
   font-family: 'Crimson Text', serif !important;
   font-size: 16px !important;
@@ -154,7 +172,6 @@ header[class*="room"] {
 }
 
 [class*="message-username"],
-[class*="username"],
 .rcx-message [class*="username"] {
   font-family: 'Cinzel', serif !important;
   font-size: 12px !important;
@@ -162,9 +179,7 @@ header[class*="room"] {
   letter-spacing: 1px !important;
 }
 
-[class*="message-time"],
-[class*="timestamp"],
-time {
+time, [class*="timestamp"] {
   font-family: 'JetBrains Mono', monospace !important;
   font-size: 10px !important;
   color: rgba(201,168,76,0.35) !important;
@@ -184,14 +199,12 @@ pre, pre code {
   background: rgba(0,0,0,0.6) !important;
   border: 1px solid var(--gm-border) !important;
   border-left: 3px solid var(--gm-gold) !important;
-  border-radius: 2px !important;
   color: var(--gm-parchment) !important;
-  overflow-x: auto !important;
 }
 
 /* ══════════════════════════════════════════
    BARRE DE SAISIE
-══════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 [class*="message-composer"],
 [class*="MessageComposer"],
 [class*="composer"] {
@@ -200,7 +213,6 @@ pre, pre code {
   padding: 10px 12px !important;
 }
 
-[class*="message-composer"] [contenteditable],
 [class*="composer"] [contenteditable],
 [class*="message-input"] {
   background: rgba(10,8,6,0.8) !important;
@@ -208,183 +220,97 @@ pre, pre code {
   border-radius: 2px !important;
   color: var(--gm-parchment) !important;
   font-family: 'Crimson Text', serif !important;
-  font-size: 16px !important; /* évite zoom iOS */
-  transition: border-color 0.2s, box-shadow 0.2s !important;
+  font-size: 16px !important;
   min-height: 40px !important;
   padding: 8px 12px !important;
 }
 
-[class*="message-composer"] [contenteditable]:focus,
-[class*="composer"] [contenteditable]:focus {
-  border-color: var(--gm-gold) !important;
-  box-shadow: 0 0 0 2px rgba(201,168,76,0.12) !important;
-  outline: none !important;
-}
-
-[class*="message-composer"] [contenteditable]:empty::before,
-[class*="composer"] [contenteditable]:empty::before {
-  color: rgba(201,168,76,0.3) !important;
-  font-style: italic !important;
-}
-
 /* ══════════════════════════════════════════
-   BOUTONS — taille tactile
-══════════════════════════════════════════ */
+   BOUTONS
+   ══════════════════════════════════════════ */
 .rcx-button--primary,
 [class*="button--primary"] {
   background: linear-gradient(135deg, #7a5c10, var(--gm-gold), #7a5c10) !important;
-  background-size: 200% !important;
   border: 1px solid rgba(201,168,76,0.4) !important;
-  border-radius: 2px !important;
   color: var(--gm-ink) !important;
   font-family: 'Cinzel', serif !important;
   font-size: 11px !important;
   letter-spacing: 2px !important;
   text-transform: uppercase !important;
-  transition: all 0.25s !important;
   min-height: var(--gm-touch-min) !important;
-  min-width: var(--gm-touch-min) !important;
-}
-
-.rcx-button--primary:hover,
-[class*="button--primary"]:hover {
-  background-position: 100% !important;
-  box-shadow: 0 4px 20px rgba(201,168,76,0.35) !important;
-  transform: translateY(-1px) !important;
 }
 
 .rcx-button--secondary,
 [class*="button--secondary"] {
   background: rgba(201,168,76,0.06) !important;
   border: 1px solid var(--gm-border) !important;
-  border-radius: 2px !important;
   color: var(--gm-parchment-dim) !important;
   font-family: 'Cinzel', serif !important;
-  font-size: 11px !important;
-  letter-spacing: 1px !important;
-  transition: all 0.2s !important;
   min-height: var(--gm-touch-min) !important;
 }
 
-.rcx-button--secondary:hover,
-[class*="button--secondary"]:hover {
-  background: rgba(201,168,76,0.1) !important;
-  border-color: var(--gm-border-hover) !important;
+/* ══════════════════════════════════════════
+   TEXTE GÉNÉRAL
+   ══════════════════════════════════════════ */
+p, span, div, li, td, th {
   color: var(--gm-parchment) !important;
 }
 
-/* Icônes boutons (toolbar) */
-[class*="toolbar"] button,
-[class*="action-button"],
-[class*="icon-button"] {
-  min-width: var(--gm-touch-min) !important;
-  min-height: var(--gm-touch-min) !important;
-  color: rgba(201,168,76,0.55) !important;
-  transition: color 0.2s !important;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cinzel', serif !important;
+  color: var(--gm-gold-light) !important;
 }
 
-[class*="toolbar"] button:hover,
-[class*="action-button"]:hover,
-[class*="icon-button"]:hover {
+a {
   color: var(--gm-gold) !important;
 }
 
-/* ══════════════════════════════════════════
-   MODALES
-══════════════════════════════════════════ */
-.rcx-modal,
-[class*="modal"] {
-  background: linear-gradient(160deg, #1a1510, #111009) !important;
-  border: 1px solid var(--gm-border) !important;
-  border-radius: 2px !important;
-  box-shadow:
-    0 0 0 1px rgba(201,168,76,0.06),
-    0 30px 80px rgba(0,0,0,0.8) !important;
-  /* Plein écran sur mobile */
-  max-width: 100% !important;
-  margin: 0 !important;
-}
-
-[class*="modal-header"],
-.rcx-modal__header {
-  border-bottom: 1px solid var(--gm-border) !important;
-  background: rgba(201,168,76,0.04) !important;
-  min-height: var(--gm-touch-min) !important;
-}
-
-[class*="modal-header"] h1,
-[class*="modal-header"] h2,
-.rcx-modal__header h1 {
-  font-family: 'Cinzel', serif !important;
+a:hover {
   color: var(--gm-gold-light) !important;
-  letter-spacing: 2px !important;
-  font-size: 14px !important;
-}
-
-/* ══════════════════════════════════════════
-   SCROLLBAR
-══════════════════════════════════════════ */
-::-webkit-scrollbar       { width: 4px; height: 4px; }
-::-webkit-scrollbar-track { background: rgba(0,0,0,0.25); }
-::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.22); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(201,168,76,0.42); }
-
-/* ══════════════════════════════════════════
-   BADGES
-══════════════════════════════════════════ */
-[class*="badge"],
-.rcx-badge {
-  background: var(--gm-ember) !important;
-  color: var(--gm-parchment) !important;
-  font-family: 'JetBrains Mono', monospace !important;
-  font-size: 10px !important;
-  border-radius: 2px !important;
-  min-width: 18px !important;
-  min-height: 18px !important;
-}
-
-/* ══════════════════════════════════════════
-   AVATARS
-══════════════════════════════════════════ */
-[class*="avatar"],
-.rcx-avatar {
-  border: 1px solid rgba(201,168,76,0.28) !important;
-  border-radius: 2px !important;
 }
 
 /* ══════════════════════════════════════════
    INPUTS
-══════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 .rcx-input-box,
 .rcx-input-box__input,
 input[class*="rcx"],
 select[class*="rcx"] {
   background: rgba(10,8,6,0.8) !important;
   border: 1px solid rgba(201,168,76,0.2) !important;
-  border-radius: 2px !important;
   color: var(--gm-parchment) !important;
   font-family: 'Crimson Text', serif !important;
   font-size: 16px !important;
   min-height: var(--gm-touch-min) !important;
 }
 
-.rcx-input-box:focus-within,
-.rcx-input-box__input:focus {
-  border-color: var(--gm-gold) !important;
-  box-shadow: 0 0 0 2px rgba(201,168,76,0.12) !important;
+/* ══════════════════════════════════════════
+   SCROLLBAR
+   ══════════════════════════════════════════ */
+::-webkit-scrollbar       { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.25); }
+::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.22); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(201,168,76,0.42); }
+
+/* ══════════════════════════════════════════
+   BADGES & AVATARS
+   ══════════════════════════════════════════ */
+[class*="badge"], .rcx-badge {
+  background: var(--gm-ember) !important;
+  color: var(--gm-parchment) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 10px !important;
+  border-radius: 2px !important;
+}
+
+[class*="avatar"], .rcx-avatar {
+  border: 1px solid rgba(201,168,76,0.28) !important;
+  border-radius: 2px !important;
 }
 
 /* ══════════════════════════════════════════
-   TEXTE GÉNÉRAL
-══════════════════════════════════════════ */
-p, span, div, li, td, th { color: var(--gm-parchment) !important; }
-h1, h2, h3, h4, h5, h6   { font-family: 'Cinzel', serif !important; color: var(--gm-gold-light) !important; }
-a { color: var(--gm-gold) !important; transition: color 0.2s !important; }
-a:hover { color: var(--gm-gold-light) !important; }
-
-/* ══════════════════════════════════════════
    SÉPARATEURS DE DATE
-══════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 [class*="date-separator"],
 [class*="DateSeparator"] {
   color: rgba(201,168,76,0.4) !important;
@@ -394,51 +320,69 @@ a:hover { color: var(--gm-gold-light) !important; }
   text-transform: uppercase !important;
 }
 
-[class*="date-separator"]::before,
-[class*="date-separator"]::after {
-  background: var(--gm-border) !important;
+/* ══════════════════════════════════════════
+   MODALES
+   ══════════════════════════════════════════ */
+.rcx-modal, [class*="modal"] {
+  background: linear-gradient(160deg, #1a1510, #111009) !important;
+  border: 1px solid var(--gm-border) !important;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.8) !important;
+}
+
+[class*="modal-header"], .rcx-modal__header {
+  border-bottom: 1px solid var(--gm-border) !important;
+  background: rgba(201,168,76,0.04) !important;
 }
 
 /* ══════════════════════════════════════════
-   TABLETTE (≥ 480px)
-══════════════════════════════════════════ */
-@media (min-width: 480px) {
-  [class*="message"],
-  .rcx-message {
-    padding: 8px 16px !important;
-  }
-
-  [class*="room-header"] h1,
-  [class*="RoomHeader"] h1 {
-    font-size: 16px !important;
-  }
-
-  [class*="message-composer"],
-  [class*="composer"] {
-    padding: 12px 16px !important;
-  }
+   FIX ICÔNES SVG
+   ══════════════════════════════════════════ */
+.rcx-icon,
+[class*="rcx-icon"],
+.rcx-icon svg,
+[class*="rcx-icon"] svg {
+  color: #c9a84c !important;
+  fill: currentColor !important;
 }
 
-/* ══════════════════════════════════════════
-   DESKTOP (≥ 768px)
-══════════════════════════════════════════ */
-@media (min-width: 768px) {
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
+i[class*="icon-"],
+[class*="rc-icon"],
+[class*="action-link"],
+[class*="toolbar"] svg,
+[class*="button"] svg,
+button svg {
+  color: #c9a84c !important;
+  fill: #c9a84c !important;
+}
 
-  .rcx-modal,
-  [class*="modal"] {
-    max-width: 600px !important;
-    margin: auto !important;
-    border-radius: 2px !important;
-  }
+/* Icônes toolbar header */
+[class*="room-header"] button svg,
+[class*="RoomHeader"] button svg {
+  color: rgba(201,168,76,0.7) !important;
+  fill: rgba(201,168,76,0.7) !important;
+}
 
-  [class*="message"],
-  .rcx-message {
-    padding: 8px 20px !important;
-  }
+[class*="room-header"] button:hover svg,
+[class*="RoomHeader"] button:hover svg {
+  color: #c9a84c !important;
+  fill: #c9a84c !important;
+}
 
-  [class*="message-username"],
-  .rcx-message [class*="username"] {
-    font-size: 13px !important;
-  }
+/* Icônes sidebar */
+[class*="sidebar"] svg,
+[class*="sidebar"] i {
+  color: rgba(201,168,76,0.6) !important;
+  fill: rgba(201,168,76,0.6) !important;
+}
+
+/* Icônes composer */
+[class*="composer"] svg,
+[class*="message-composer"] svg {
+  color: rgba(201,168,76,0.5) !important;
+  fill: rgba(201,168,76,0.5) !important;
+}
+
+[class*="composer"] button:hover svg {
+  color: #c9a84c !important;
+  fill: #c9a84c !important;
 }
